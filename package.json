@@ -10,8 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/themes": "^1.1.2",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@solana/wallet-adapter-backpack": "^0.1.14",
+    "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/wallet-adapter-react": "^0.15.35",
+    "@solana/wallet-adapter-react-ui": "^0.9.34",
+    "@solana/wallet-adapter-wallets": "^0.19.22",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.2",
+    "sass": "^1.66.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
