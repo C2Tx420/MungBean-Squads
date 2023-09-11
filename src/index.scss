@@ -14,7 +14,7 @@ main {
 
 h1 {
   font-size: 2em;
-  margin: .67em 0
+  margin: 0
 }
 
 hr {
@@ -180,3 +180,16 @@ template {
 }
 
 /*# sourceMappingURL=normalize.min.css.map */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap');
+
+html{
+  font-size: 62.5%;
+  font-family: 'Roboto', sans-serif;
+}
+*{
+  box-sizing: border-box;
+}
+
+
+

@@ -1,17 +1,19 @@
-import { ReactNode, useMemo } from "react"
+import { BackpackWalletAdapter } from "@solana/wallet-adapter-backpack"
 import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react"
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui"
-import { PhantomWalletAdapter, SolflareWalletAdapter } from "@solana/wallet-adapter-wallets"
-import { BackpackWalletAdapter } from "@solana/wallet-adapter-backpack"
+import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets"
+import { ReactNode, useMemo } from "react"
+import "@solana/wallet-adapter-react-ui/styles.css"
 
 interface WalletAdapterProps {
   children: ReactNode
 }
 
 export default function WalletAdapter(props: WalletAdapterProps) {
-  const endpoint = 'https://api.devnet.solana.com'
+  const endpoint = useMemo(() => "https://rpc.helius.xyz/?api-key=1ba00d42-c9d3-4459-89b1-2c48142aacbc", [])
+
   const wallets = useMemo(
-    () => [new PhantomWalletAdapter(), new BackpackWalletAdapter(), new SolflareWalletAdapter()],
+    () => [new PhantomWalletAdapter(), new BackpackWalletAdapter()],
     []
   )
 
