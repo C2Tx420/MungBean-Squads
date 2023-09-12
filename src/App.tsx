@@ -7,8 +7,8 @@ import {
   Route,
   BrowserRouter,
 } from "react-router-dom";
-import { routeList } from './constant/route';
-import { routeModel } from './model/route.model';
+import { routeList } from './config/route';
+import { routeModel } from './types/route.model';
 
 function App() {
   const theme: any = useSelector((state: RootState) => state.theme)

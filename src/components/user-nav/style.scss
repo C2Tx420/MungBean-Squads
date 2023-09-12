@@ -1,0 +1,19 @@
+.usernav {
+    &__avatar {
+        cursor: pointer;
+        padding: 0 !important;
+        margin: 0 !important;
+        border-radius: 50% !important;
+
+        &:hover,
+        &:active,
+        &:focus-visible,
+        &:active {
+            background-color: unset !important;
+            border: unset !important;
+        }
+    }
+    &__content{
+        width: 150px;
+    }
+}

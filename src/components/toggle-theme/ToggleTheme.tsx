@@ -9,7 +9,7 @@ export default function ToggleTheme() {
     const dispatch = useDispatch();
     const size = 20;
     return (
-        <IconButton variant="outline" className='toggleTheme' color='gray' onClick={()=>dispatch(toggleTheme())} size={'4'} style={{padding: 10, cursor: 'pointer'}}>
+        <IconButton variant="outline" className='toggleTheme' color='gray' onClick={()=>dispatch(toggleTheme())} size={'3'} style={{padding: 4, cursor: 'pointer'}}>
             {theme === 'dark' ?
                 <MoonIcon width={size} height={size} />
                 :
