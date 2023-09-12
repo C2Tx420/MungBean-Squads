@@ -1,28 +1,24 @@
-import { Keypair, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { Connection, Keypair } from "@solana/web3.js";
+import * as multisig from "@sqds/multisig";
 import { Permissions } from "@sqds/multisig/lib/types";
-import { multisigCreate } from "@sqds/multisig/lib/rpc";
-import { Button } from "@radix-ui/themes";
-import { getMultisigPda } from "@sqds/multisig";
-import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
-export default function Home() {
-  const { connection } = useConnection();
-  const wallet = useWallet()
-  // const { createMultisig } = useSquads();
-  const test = async () => {
+export const useSquads = () => {
+  const connection = new Connection(
+    "https://rpc.helius.xyz/?api-key=1ba00d42-c9d3-4459-89b1-2c48142aacbc"
+  );
+
+  const createMultisig = async () => {
     const createKey = Keypair.generate().publicKey;
 
     // Creator should be a Keypair or a Wallet Adapter wallet
-    const creator: any = Keypair.generate();
-
-    console.log(creator)
+    const creator = Keypair.generate();
 
     // Derive the multisig PDA
-    const [multisigPda] = getMultisigPda({
-      createKey,
+    const [multisigPda] = multisig.getMultisigPda({
+        createKey,
     });
 
-    await multisigCreate({
+    const signature = await multisig.rpc.multisigCreate({
       connection,
       // One time random Key
       createKey,
@@ -44,16 +40,11 @@ export default function Home() {
         },
       ],
       // This means that there needs to be 2 votes for a transaction proposal to be approved
-      threshold: 1,
+      threshold: 2,
     });
 
-    // console.log("Multisig created: ", signature);
-  }
+    console.log("Multisig created: ", signature);
+  };
 
-  return (
-    <div>
-      Home
-      <Button onClick={test}>create</Button>
-    </div>
-  )
-}
+  return { createMultisig };
+};

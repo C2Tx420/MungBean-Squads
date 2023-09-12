@@ -10,7 +10,7 @@ interface WalletAdapterProps {
 }
 
 export default function WalletAdapter(props: WalletAdapterProps) {
-  const endpoint = useMemo(() => "https://rpc.helius.xyz/?api-key=1ba00d42-c9d3-4459-89b1-2c48142aacbc", [])
+  const endpoint = useMemo(() => process.env.RPC || "https://api.devnet.solana.com", [])
 
   const wallets = useMemo(
     () => [new PhantomWalletAdapter(), new BackpackWalletAdapter()],
