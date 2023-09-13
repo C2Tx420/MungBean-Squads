@@ -8,7 +8,8 @@ import './style.scss';
 export default function UserNav() {
     const { disconnect, publicKey } = useWallet();
     const [state, copyToClipboard] = useCopyToClipboard();
-
+    // fix state never read
+    state
     return (
         <>
             {publicKey && (

@@ -1,50 +1,51 @@
-import { Connection, Keypair } from "@solana/web3.js";
+import { WalletContextState, useConnection } from "@solana/wallet-adapter-react";
+import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import * as multisig from "@sqds/multisig";
 import { Permissions } from "@sqds/multisig/lib/types";
 
 export const useSquads = () => {
-  const connection = new Connection(
-    "https://rpc.helius.xyz/?api-key=1ba00d42-c9d3-4459-89b1-2c48142aacbc"
-  );
+  const {connection} = useConnection()
 
-  const createMultisig = async () => {
-    const createKey = Keypair.generate().publicKey;
-
-    // Creator should be a Keypair or a Wallet Adapter wallet
-    const creator = Keypair.generate();
-
-    // Derive the multisig PDA
-    const [multisigPda] = multisig.getMultisigPda({
+  const createMultisig = async (wallet: WalletContextState) => {
+    if(wallet.publicKey) {
+      const createKey = wallet.publicKey;
+  
+      const creator = wallet.publicKey;
+  
+      const [multisigPda] = multisig.getMultisigPda({
         createKey,
-    });
-
-    const signature = await multisig.rpc.multisigCreate({
-      connection,
-      // One time random Key
-      createKey,
-      // The creator & fee payer
-      creator,
-      // The PDA of the multisig you are creating, derived by a random PublicKey
-      multisigPda,
-      // Here the config authority will be the system program
-      configAuthority: null,
-      // Create without any time-lock
-      timeLock: 0,
-      // List of the members to add to the multisig
-      members: [
-        {
-          // Members Public Key
-          key: creator.publicKey,
-          // Members permissions inside the multisig
-          permissions: Permissions.all(),
-        },
-      ],
-      // This means that there needs to be 2 votes for a transaction proposal to be approved
-      threshold: 2,
-    });
-
-    console.log("Multisig created: ", signature);
+      });
+  
+      const signature = await multisig.instructions.multisigCreate({
+        createKey,
+        creator,
+        multisigPda,
+        configAuthority: null,
+        timeLock: 0,
+        members: [
+          {
+            key: creator,
+            permissions: Permissions.all(),
+          },
+        ],
+        threshold: 1,
+      });
+      
+      const tx = new Transaction()
+      tx.add(signature)
+      await wallet.sendTransaction(tx, connection)
+      await wallet.signTransaction?.(tx)
+    }
+    // console.log(signature.keys[0].pubkey.toString());
   };
 
-  return { createMultisig };
+  const getMultisig = async (connection: Connection, pubkey: PublicKey) => {
+    const { Multisig } = multisig.accounts;
+    const [multisigPda] = multisig.getMultisigPda({
+      createKey: pubkey,
+  });
+    const result = await Multisig.fromAccountAddress(connection, multisigPda);
+    console.log(result);
+  };
+  return { createMultisig, getMultisig };
 };

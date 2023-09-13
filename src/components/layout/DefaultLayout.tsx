@@ -1,11 +1,21 @@
 import Header from '../header'
 import { Outlet } from 'react-router-dom'
+import SideNav from '../side-nav'
+import './style.scss'
+import { Container } from '@radix-ui/themes'
 
 export default function DefaultLayout() {
   return (
     <>
       <Header />
-      <Outlet />
+        <Container>
+          <div className="main">
+            <SideNav />
+            <div className="main__content">
+              <Outlet />
+            </div>
+          </div>
+        </Container>
     </>
   )
 }
