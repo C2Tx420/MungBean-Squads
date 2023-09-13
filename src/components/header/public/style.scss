@@ -1,0 +1,12 @@
+.header{
+    box-shadow: 0 1px var(--gray-a4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    &__right{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+}

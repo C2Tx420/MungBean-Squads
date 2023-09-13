@@ -23,9 +23,14 @@
         }
 
         &:hover {
-            background-color: #e0e0ff0f;
+            background-color: var(--light-hover);
             transition: .5s;
+        }
+    }
 
+    &.dark &__item{
+        &:hover {
+            background-color: var(--dark-hover);
         }
     }
 }

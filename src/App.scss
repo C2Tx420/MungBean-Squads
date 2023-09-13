@@ -1,6 +1,8 @@
 :root {
   --active-cl: #00a3ff;
   --theme-text-cl: var(--theme-panel--focus-ring-color);
+  --dark-hover: rgba(224, 224, 255, 0.0588235294);
+  --light-hover: #ccc;
 }
 .theme-wrapper {
   background-color: var(--color-page-background);

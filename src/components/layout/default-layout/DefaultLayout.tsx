@@ -1,6 +1,6 @@
-import Header from '../header'
+import Header from '../../header/private'
 import { Outlet } from 'react-router-dom'
-import SideNav from '../side-nav'
+import SideNav from '../../side-nav'
 import './style.scss'
 import { Container } from '@radix-ui/themes'
 

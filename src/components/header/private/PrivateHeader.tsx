@@ -1,8 +1,8 @@
+import ToggleTheme from '../../toggle-theme';
+import UserNav from '../../user-nav';
 import './style.scss';
-import ToggleTheme from "../toggle-theme";
-import UserNav from "../user-nav/";
 
-export default function Header() {
+export default function PrivateHeader() {
     return (
         <header className="header">
             <img src="/mungbean.png" width={40}
