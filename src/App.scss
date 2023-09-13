@@ -1,3 +1,7 @@
+:root {
+  --active-cl: #00a3ff;
+  --theme-text-cl: var(--theme-panel--focus-ring-color);
+}
 .theme-wrapper {
   background-color: var(--color-page-background);
   min-height: 100vh;
