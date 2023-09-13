@@ -54,7 +54,7 @@ export const useSquads = () => {
     const [multisigPda] = multisig.getMultisigPda({
       createKey,
     });
-    const [vaultPda, vaultBump] = multisig.getVaultPda({
+    const [vaultPda] = multisig.getVaultPda({
       multisigPda,
       index: 0,
   });
