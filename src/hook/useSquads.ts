@@ -46,6 +46,20 @@ export const useSquads = () => {
   });
     const result = await Multisig.fromAccountAddress(connection, multisigPda);
     console.log(result);
+    console.log(result.configAuthority.toString());
+    console.log(result.members[0].key.toString());
   };
-  return { createMultisig, getMultisig };
+
+  const getMainVault = async (createKey: PublicKey) => {
+    const [multisigPda] = multisig.getMultisigPda({
+      createKey,
+    });
+    const [vaultPda, vaultBump] = multisig.getVaultPda({
+      multisigPda,
+      index: 0,
+  });
+
+  console.log(vaultPda.toString())
+  }
+  return { createMultisig, getMultisig, getMainVault };
 };
