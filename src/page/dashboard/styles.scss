@@ -1,0 +1,27 @@
+.dashboard {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .content-box{
+        flex: 1;
+    }
+    &__addr{
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 10px;
+        p{
+            display: inline;
+        }
+        &-label{
+            font-weight: 500;
+        }
+        &-copy{
+            cursor: pointer;
+            &:hover{
+                opacity: .8;
+            }
+        }
+    }
+}
