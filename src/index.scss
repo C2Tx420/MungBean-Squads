@@ -11,6 +11,9 @@ body {
 main {
   display: block
 }
+p{
+  margin: 0;
+}
 
 h1 {
   font-size: 2em;
@@ -186,6 +189,7 @@ template {
 html{
   font-size: 62.5%;
   font-family: 'Roboto', sans-serif;
+  overflow: hidden;
 }
 *{
   box-sizing: border-box;
