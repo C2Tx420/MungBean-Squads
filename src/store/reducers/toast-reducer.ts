@@ -6,10 +6,11 @@ export const toastSlice = createSlice({
   name: "toast",
   initialState,
   reducers: {
-    createToast: (state, action) => {
-        return state = [action.payload];
+    createToast: (state: any, action: any) => {
+      const newState = [action.payload]
+        return state = newState;
     },
-    removeToast: (state) => {
+    removeToast: (state: any) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       return state = [];
     },
