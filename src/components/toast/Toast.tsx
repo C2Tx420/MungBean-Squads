@@ -4,6 +4,8 @@ import { RootState } from '../../store/store';
 import { removeToast } from '../../store/reducers/toast-reducer';
 import { Cross2Icon } from '@radix-ui/react-icons';
 
+import './style.scss';
+
 export default function Toast() {
     const toastList = useSelector((state: RootState) => state.toast);
     const dispatch = useDispatch();

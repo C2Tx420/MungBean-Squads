@@ -8,7 +8,7 @@ export default function DefaultLayout() {
   return (
     <>
       <Header />
-        <Container size={'3'}>
+        <Container>
           <div className="main">
             <SideNav />
             <div className="main__content">
