@@ -8,11 +8,11 @@ import { store } from './store/store.ts';
 import WalletAdapter from './components/wallet-adapter/WalletAdapter.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <WalletAdapter>
       <Provider store={store}>
         <App />
       </Provider>
     </WalletAdapter>
-  </React.StrictMode>,
+  // </React.StrictMode>,
 )

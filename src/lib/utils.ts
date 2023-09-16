@@ -20,3 +20,8 @@ export function truncateWallet(str: string | undefined | null, length = 4): stri
   
     return new URL(`${variant}/${size}/${wallet}?colors=${colors.join(",")}`, BORING_AVATAR_ENDPOINT)
   }
+
+  export function toTitle(value: string) {
+    const firstLetter = value.slice(0,1).toUpperCase();
+    return firstLetter + value.slice(1)
+  }
