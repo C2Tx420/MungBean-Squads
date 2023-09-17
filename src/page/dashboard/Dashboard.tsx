@@ -3,17 +3,20 @@ import ContentBox from "../../components/content-box";
 import './styles.scss';
 import { useSquads } from "../../hook/useSquads";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { truncateWallet } from "../../lib/utils";
+import { historyTransactionConvert, truncateWallet } from "../../lib/utils";
 import { CopyIcon } from "@radix-ui/react-icons";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, YAxis } from "recharts";
 import HistoryTransaction from "../../components/history-transaction";
 import { Button } from "@radix-ui/themes";
 import TransferTools from "../../components/transfer-tools";
+import { useShyft } from "../../hook/useShyft";
 
 export default function Dashboard() {
   const { getMainVault } = useSquads();
+  const { getBalance, getHistoryTransaction } = useShyft();
   const { publicKey } = useWallet();
   const [vaultAddress, setVaultAddress] = useState('');
+  const [vaultValue, setVaultValue] = useState(0);
 
   useEffect(() => {
     (async () => {
@@ -24,6 +27,20 @@ export default function Dashboard() {
 
     })()
   }, [publicKey])
+
+  useEffect(() => {
+    (async () => {
+      if (vaultAddress) {
+        // const balance = await getBalance(vaultAddress);
+        // setVaultValue(balance)
+
+        // const history = await getHistoryTransaction(vaultAddress);
+        // console.log(history)
+
+        historyTransactionConvert(1)
+      }
+    })()
+  }, [vaultAddress])
 
   const data = [
     {
@@ -65,7 +82,7 @@ export default function Dashboard() {
           <div className="dashboard__vault-wrapper">
             <div className="dashboard__vault-balance">
               <img src="/sol.png" alt="" />
-              <p>0 <span>SOL</span></p>
+              <p>{vaultValue} <span>SOL</span></p>
             </div>
             <div className="dashboard__vault-tools">
               <TransferTools type="deposit" />
