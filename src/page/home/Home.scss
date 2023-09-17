@@ -1,10 +1,14 @@
 .container{
-    height: 100vh;
+    margin: 0 auto;
+    padding : 0 1rem ;
+    max-width: 60rem;
 
 }
-
+.section1{
+    height: 800px;
+}
 .titlemungbean{
-    margin-top: 50px;
+    margin-top: 20px;
     margin-left: 30px;
    position: absolute;
    left: 0px;
@@ -40,7 +44,6 @@
     
 }
 
-
 .imagemungbean{
     
     margin-top: 50px;
@@ -50,7 +53,7 @@
     background-size: cover;
     
 }
-  .three-d-image{   
+  .three-d-image{  
     animation-name: bounce;
    
     animation: bounce 1s infinite alternate;
@@ -129,6 +132,8 @@
   /// 
   /// 
   /// 
+  /// 
+  /// 
 
 //  .img-secon{
 //     margin-top: 50px;
@@ -140,8 +145,21 @@
 //     height: 400px;
 //     width: 400px;
 //  }
-
+// .img-secon span{
+   
+//     font-size: 35px;
+//     font-weight: bold;
+//     font-size: 7rem;
+// }
 //  .img-secon p{
-//     font-size: 25px;
-//     margin-left: 60px;
+
+//     color: rgb(184, 181, 181);
+//     display: block;
+//     margin-left: 100px;
 //  }
+//  .seconmain{
+//     height: 800px;
+//     margin-top:100px;
+//  }
+
+

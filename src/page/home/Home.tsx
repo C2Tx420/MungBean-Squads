@@ -1,16 +1,32 @@
 import { useEffect, useState } from "react";
-import { useSquads } from "../../hook/useSquads";
 import {Section} from "@radix-ui/themes"
-import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight,FaArrowUp } from 'react-icons/fa';
 import PublicHeader from "../../components/header/public/PublicHeader";
 import './Home.scss'
-import React, { useRef } from "react";
 
 
 
 
 export default function Home() {
  const [showText, setShowText] = useState(false);
+ const [backtoTopbutton, setBacktoTopbutton] = useState(false); 
+
+useEffect(() =>{
+  window.addEventListener("scroll", ()=>{
+    if(window.scrollY > 200){
+      setBacktoTopbutton(true);
+    }else{
+      setBacktoTopbutton(false);
+    }
+  })
+}, [])
+const scroolUp = () =>{
+    window.scrollTo({
+       top:0,
+       behavior: "smooth"
+    })
+}
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -43,18 +59,27 @@ export default function Home() {
              </div>
             </Section>
             </div> 
-            
+            {/* {backtoTopbutton && (
+              <button style={{
+                  position:"fixed",
+                  bottom:"50px",
+                  right:"50px",
+                  height: "50px",
+                  width:"50px",
+              }}
+              onClick={scroolUp}><FaArrowUp /></button>
+            )} */}
 
-               {/* phan nay la phan 2
-              {/* <div className="seconmain">
+              
+               {/* <Section className="seconmain">
                 <div className="img-secon">
-                    <img src="/hihi.jpg" alt="" />
-        
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi!</p>
+                    <img src="/giphy.gif" alt="" />
+
+                    <p className={`typing-text ${showText ? "show" : ""}`}><span className="das">Invest</span> <br />Effortlessly manage your finances with MungBean 🇻🇳. <br />Track income, expenses, and savings goals seamlessly. <br /> Take control of your financial future today 💰💰</p>
                 </div>
 
-              </div> */}
-              
+              </Section> 
+               */}
               
          
     </div>
