@@ -1,31 +1,15 @@
 import { useEffect, useState } from "react";
-import {Section} from "@radix-ui/themes"
-import { FaArrowRight,FaArrowUp } from 'react-icons/fa';
+import { Button, Container, Section } from "@radix-ui/themes"
 import PublicHeader from "../../components/header/public/PublicHeader";
 import './Home.scss'
+import { ArrowRightIcon } from "@radix-ui/react-icons";
+import { Link } from "react-router-dom";
 
 
 
 
 export default function Home() {
- const [showText, setShowText] = useState(false);
- const [backtoTopbutton, setBacktoTopbutton] = useState(false); 
-
-useEffect(() =>{
-  window.addEventListener("scroll", ()=>{
-    if(window.scrollY > 200){
-      setBacktoTopbutton(true);
-    }else{
-      setBacktoTopbutton(false);
-    }
-  })
-}, [])
-const scroolUp = () =>{
-    window.scrollTo({
-       top:0,
-       behavior: "smooth"
-    })
-}
+  const [showText, setShowText] = useState(false);
 
 
   useEffect(() => {
@@ -39,27 +23,30 @@ const scroolUp = () =>{
   }, []);
   return (
     <div>
-       <PublicHeader />
-           <div className="container">
-            <Section className="section1">
-              <div className="titlemungbean">
-            <h2>Application faster  <br />and better</h2>
-            <p className={`typing-text ${showText ? "show" : ""}`}>
-            Welcome to our website 😉! We are a leading electronic wallet platform. <br /> enabling you to manage digital assets and invest conveniently.<br />Join us now to explore unique investment opportunities through our <br /> electronic wallet.🎉<br />
+      <PublicHeader />
+      <Container size={"3"}>
+        <section className="hero">
+          <div className="hero__left">
+            <p className="hero__left-title">Be Smart, Be Flex</p>
+            <p className={"hero__left-content"}>
+              Welcome to <span className="hero__left-content-brand">MungBean</span> 😉! We are a app with multiple shared pockets. 
+              Enabling you to manage and invest conveniently. 
+              Join us now to explore.🎉
             </p>
-
-           <div className="btn"> 
-           <a href="#" className="btnstart">
-           Get Started <FaArrowRight className="arrow-icon" />
-          </a>
-            </div>
-              </div>
-             <div className="imagemungbean">
-              <img src="/mungbean.png" alt=""  className="three-d-image"/>
-             </div>
-            </Section>
-            </div> 
-            {/* {backtoTopbutton && (
+            <Link className="hero__left-btn" to={'/dashboard'}>
+              <Button size={"4"}>
+                Get Started
+                <ArrowRightIcon/>
+              </Button>
+            </Link>
+          </div>
+          <div className="hero__right">
+            <img src="/mungbean.png" alt="" className="three-d-image" />
+            <div className="hero__right-glow"></div>
+          </div>
+        </section>
+      </Container>
+      {/* {backtoTopbutton && (
               <button style={{
                   position:"fixed",
                   bottom:"50px",
@@ -70,18 +57,18 @@ const scroolUp = () =>{
               onClick={scroolUp}><FaArrowUp /></button>
             )} */}
 
-              
-               {/* <Section className="seconmain">
+
+      {/* <Section className="seconmain">
                 <div className="img-secon">
                     <img src="/giphy.gif" alt="" />
 
-                    <p className={`typing-text ${showText ? "show" : ""}`}><span className="das">Invest</span> <br />Effortlessly manage your finances with MungBean 🇻🇳. <br />Track income, expenses, and savings goals seamlessly. <br /> Take control of your financial future today 💰💰</p>
+                    <p className={`typing-text ${showText ? "show" : ""}`}><span className="das">Invest</span> <br />Effortlessly manage your finances with MungBean 🇻🇳. <br />Track income, expenses, and savings goals seamlessly.Take control of your financial future today 💰💰</p>
                 </div>
 
               </Section> 
                */}
-              
-         
+
+
     </div>
   )
 }

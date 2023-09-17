@@ -143,3 +143,10 @@ export function typeTransactionCheck(action: any, pubKey: string) {
 export function timeout(ms: number) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+export const scroolUp = () =>{
+  window.scrollTo({
+     top:0,
+     behavior: "smooth"
+  })
+}
