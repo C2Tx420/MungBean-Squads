@@ -3,7 +3,7 @@ import ContentBox from "../../components/content-box";
 import './styles.scss';
 import { useSquads } from "../../hook/useSquads";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { historyTransactionConvert, truncateWallet } from "../../lib/utils";
+import { historyTransactionConvert, timeout, truncateWallet } from "../../lib/utils";
 import { CopyIcon } from "@radix-ui/react-icons";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, YAxis } from "recharts";
 import HistoryTransaction from "../../components/history-transaction";
@@ -17,6 +17,7 @@ export default function Dashboard() {
   const { publicKey } = useWallet();
   const [vaultAddress, setVaultAddress] = useState('');
   const [vaultValue, setVaultValue] = useState(0);
+  const [historyData, setHistoryData] = useState([])
 
   useEffect(() => {
     (async () => {
@@ -31,13 +32,16 @@ export default function Dashboard() {
   useEffect(() => {
     (async () => {
       if (vaultAddress) {
-        // const balance = await getBalance(vaultAddress);
-        // setVaultValue(balance)
+        const balance = await getBalance(vaultAddress);
+        setVaultValue(balance);
 
-        // const history = await getHistoryTransaction(vaultAddress);
-        // console.log(history)
+        await timeout(1000);
 
-        historyTransactionConvert(1)
+        const history = await getHistoryTransaction(vaultAddress);
+
+        historyTransactionConvert(history, vaultAddress);
+
+        setHistoryData(await historyTransactionConvert(history, vaultAddress));
       }
     })()
   }, [vaultAddress])
@@ -95,7 +99,9 @@ export default function Dashboard() {
           <div className="dashboard__content-left">
             <div className="dashboard__content-left-recent">
               <h4>Recent transactions</h4>
-              <HistoryTransaction />
+              {historyData && historyData.map((data: any,idx: any)=>(
+                <HistoryTransaction key={idx} data={data}/>
+              ))}
             </div>
           </div>
           <div className="dashboard__content-right">
