@@ -1,0 +1,147 @@
+.container{
+    height: 100vh;
+
+}
+
+.titlemungbean{
+    margin-top: 50px;
+    margin-left: 30px;
+   position: absolute;
+   left: 0px;
+
+}
+
+.titlemungbean h2{
+    font-size: 7rem;
+    padding: auto;
+    margin-bottom: 20px;
+}
+
+.titlemungbean p{
+    color: rgb(184, 181, 181);
+    display: block;
+}
+
+.btn{
+    margin-top: 100px;
+}
+.btn a{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 40px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color:rgb(239, 234, 234); /* Màu nền trong Light Mode */
+    color:#27326f;
+    border: none; /* Loại bỏ viền xung quanh nút */
+    border-radius: 5px; /* Bo góc nút */
+    padding: 20px 20px 20px 200px;
+    cursor: pointer; /* Con trỏ tay khi di chuột qua nút */
+
+    
+}
+
+
+.imagemungbean{
+    
+    margin-top: 50px;
+    position: absolute;
+    right: 30px;
+    // background-image: url(/public/background.gif);
+    background-size: cover;
+    
+}
+  .three-d-image{   
+    animation-name: bounce;
+   
+    animation: bounce 1s infinite alternate;
+  }
+
+@keyframes bounce {
+    0%{
+       transform:  translateY(0);
+    }
+    20%{
+       transform: translateY(0);
+    }
+    40%{
+       transform: translateY(-30px);
+    }
+    50%{
+       transform: translateY(0);
+    }
+    60%{
+       transform: translateY(-15px);
+    }
+    80%{
+       transform: translateY(0);
+    }
+    100%{
+       transform: translateY(0);
+    }
+
+ }
+
+
+  
+ .typing-text {
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: bold;
+    border-right: 2px solid transparent; /* Dấu nháy đang viết */
+    animation: typing 3s steps(40, end) forwards; /* Animation viết từng từ một */
+  }
+  
+  /* Keyframes animation */
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+
+  .typing-text::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    animation: blink 0.7s infinite alternate; 
+  }
+  
+
+  @keyframes blink {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  /// phan tran la cua phan home 
+  /// 
+  /// 
+  /// 
+  /// 
+
+//  .img-secon{
+//     margin-top: 50px;
+//     display: flex;
+//     padding-left: 50px;
+//  }
+
+//  .img-secon img{
+//     height: 400px;
+//     width: 400px;
+//  }
+
+//  .img-secon p{
+//     font-size: 25px;
+//     margin-left: 60px;
+//  }
