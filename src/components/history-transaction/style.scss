@@ -1,0 +1,24 @@
+.history-transaction {
+    &__date {
+        font-weight: 700;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--gray-a4);
+        color: var(--gray-11);
+    }
+    &__item {
+        border-bottom: 1px solid var(--gray-a4);
+
+        display: flex;
+        justify-content: space-between;
+
+        padding: 4px 0;
+
+        p {
+            font-weight: 500;
+        }
+
+        &-time {
+            color: var(--gray-a10);
+        }
+    }
+}

@@ -1,7 +1,13 @@
+import ContentBox from "../../components/content-box";
 
 
 export default function Pockets() {
   return (
-    <div>Pockets</div>
+    <div className="pockets">
+      <div>Pockets</div>
+      <ContentBox>
+        aaa
+      </ContentBox>
+    </div>
   )
 }

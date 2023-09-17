@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons'
-import { toggleTheme } from '../../store/reducers/themeReducer';
+import { toggleTheme } from '../../store/reducers/theme-reducer';
 import { IconButton } from '@radix-ui/themes';
 
 export default function ToggleTheme() {

@@ -4,18 +4,18 @@ import * as multisig from "@sqds/multisig";
 import { Permissions } from "@sqds/multisig/lib/types";
 
 export const useSquads = () => {
-  const {connection} = useConnection()
+  const { connection } = useConnection()
 
   const createMultisig = async (wallet: WalletContextState) => {
-    if(wallet.publicKey) {
+    if (wallet.publicKey) {
       const createKey = wallet.publicKey;
-  
+
       const creator = wallet.publicKey;
-  
+
       const [multisigPda] = multisig.getMultisigPda({
         createKey,
       });
-  
+
       const signature = await multisig.instructions.multisigCreate({
         createKey,
         creator,
@@ -30,7 +30,7 @@ export const useSquads = () => {
         ],
         threshold: 1,
       });
-      
+
       const tx = new Transaction()
       tx.add(signature)
       await wallet.sendTransaction(tx, connection)
@@ -43,7 +43,7 @@ export const useSquads = () => {
     const { Multisig } = multisig.accounts;
     const [multisigPda] = multisig.getMultisigPda({
       createKey: pubkey,
-  });
+    });
     const result = await Multisig.fromAccountAddress(connection, multisigPda);
     console.log(result);
     console.log(result.configAuthority.toString());
@@ -57,9 +57,9 @@ export const useSquads = () => {
     const [vaultPda] = multisig.getVaultPda({
       multisigPda,
       index: 0,
-  });
-
-  console.log(vaultPda.toString())
+    });
+    console.log(vaultPda.toString())
+    return vaultPda.toString();
   }
   return { createMultisig, getMultisig, getMainVault };
 };

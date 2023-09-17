@@ -1,0 +1,50 @@
+.toast {
+    width: 300px;
+    background: var(--bg2-cl);
+    border: 1px solid var(--gray-a4);
+    border-radius: 12px;
+    height: 120px;
+    padding: 10px;
+
+    animation: slideIn .5s forwards;
+
+    &__title{
+        font-weight: 700;
+        font-size: 1.8rem;
+        &.success {
+            color: green;
+        }
+        &.error {
+            color: red;
+        }
+    }
+    &__desc {
+    }
+
+    &__close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        transition: .2;
+
+        &:hover {
+            opacity: .5;
+            transition: .2;
+        }
+    }
+
+    @keyframes slideIn {
+        from {
+            position: absolute;
+            right: -300px;
+            bottom: 10px;
+        }
+        to {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            transition: .5s;
+        }
+    }
+}

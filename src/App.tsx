@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { routeList } from './config/route';
 import { routeModel } from './types/route.model';
+import ToastComponent from './components/toast';
 
 function App() {
   const theme: any = useSelector((state: RootState) => state.theme)
@@ -31,6 +32,7 @@ function App() {
           {geneRoute(routeList)}
         </Routes>
       </BrowserRouter>
+      <ToastComponent/>
     </Theme>
   )
 }

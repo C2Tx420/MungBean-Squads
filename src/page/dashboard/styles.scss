@@ -1,0 +1,111 @@
+.dashboard {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .content-box {
+        flex: 1;
+    }
+
+    &__heading{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-addr {
+            gap: 10px;
+            padding: 10px 0;
+    
+            p {
+                display: inline;
+            }
+    
+            &-label {
+                font-weight: 500;
+            }
+    
+            &-copy {
+                cursor: pointer;
+    
+                &:hover {
+                    opacity: .8;
+                }
+            }
+        }
+    }
+
+    &__vault {
+        // border-bottom: 3px solid var(--gray-a4);
+        border-top: 3px solid var(--gray-a4);
+        padding: 20px 0;
+        &-balance {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            p {
+                span {
+                    font-size: 1.4rem;
+                    font-weight: 700;
+                }
+            }
+
+            img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+            }
+        }
+
+        &-wrapper{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &-tools{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            button{
+                cursor: pointer;
+            }
+        }
+    }
+
+
+    &__content {
+        display: flex;
+        gap: 10px;
+        height: 100%;
+        border-top: 3px solid var(--gray-a4);
+        padding-top: 20px;
+
+        &-left,
+        &-right {
+            width: 50%;
+        }
+
+        &-left {
+            &-chart{
+                width: 110%;
+                height: 40%;
+                margin-left: -10%;
+            }
+            &-recent{
+                // padding: 20px 0;
+            }
+        }
+    }
+
+    &__chart-tooltip {
+        border: 1px solid var(--gray-a4);
+        border-radius: 12px;
+        padding: 10px;
+        background-color: var(--bg2-cl);
+
+        span {
+            font-weight: 700;
+        }
+    }
+}
