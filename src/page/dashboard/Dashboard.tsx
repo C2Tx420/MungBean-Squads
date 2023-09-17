@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ContentBox from "../../components/content-box";
 import './styles.scss';
 import { useSquads } from "../../hook/useSquads";
-import { useWallet } from "@solana/wallet-adapter-react";
+import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { historyTransactionConvert, timeout, truncateWallet } from "../../lib/utils";
 import { CopyIcon } from "@radix-ui/react-icons";
 import { Area, AreaChart, ResponsiveContainer, Tooltip, YAxis } from "recharts";
@@ -13,11 +13,13 @@ import { useShyft } from "../../hook/useShyft";
 
 export default function Dashboard() {
   const { getMainVault } = useSquads();
-  const { getBalance, getHistoryTransaction } = useShyft();
+  const { getBalance, getHistoryTransaction, sendSol, sign } = useShyft();
   const { publicKey } = useWallet();
   const [vaultAddress, setVaultAddress] = useState('');
   const [vaultValue, setVaultValue] = useState(0);
-  const [historyData, setHistoryData] = useState([])
+  const [historyData, setHistoryData] = useState([]);
+  const wallet = useWallet();
+  const {connection} = useConnection()
 
   useEffect(() => {
     (async () => {
@@ -69,6 +71,7 @@ export default function Dashboard() {
       uv: 5,
     },
   ];
+
   return (
     <div className="dashboard">
       <ContentBox>
