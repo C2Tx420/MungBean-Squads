@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const initialState: any = [];
 
@@ -6,7 +6,7 @@ export const toastSlice = createSlice({
   name: "toast",
   initialState,
   reducers: {
-    createToast: (state: any, action: any) => {
+    createToast: (state: any, action: PayloadAction<any>): any => {
       const newState = [action.payload]
         return state = newState;
     },

@@ -11,7 +11,7 @@ export default function ConnectWallet() {
                     height={40} />
             </h1>
             <div className="connect-wallet-modal__desc">
-                <Text>Connect to continue</Text>
+                <Text>Connect to create Multisig and continue</Text>
             </div>
             <div className="connect-wallet-modal__btn">
                 <WalletMultiButton />
