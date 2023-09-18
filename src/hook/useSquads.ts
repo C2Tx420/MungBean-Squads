@@ -1,6 +1,7 @@
 import { WalletContextState, useConnection } from "@solana/wallet-adapter-react";
 import { Connection, PublicKey, Transaction } from "@solana/web3.js";
 import * as multisig from "@sqds/multisig";
+import { Multisig } from "@sqds/multisig/lib/generated";
 import { Permissions } from "@sqds/multisig/lib/types";
 
 export const useSquads = () => {
@@ -65,6 +66,17 @@ export const useSquads = () => {
     });
     console.log(vaultPda.toString())
     return vaultPda.toString();
+  }
+
+  const createVaultTransaction = (createKey: PublicKey) => {
+    const [multisigPda] = multisig.getMultisigPda({
+      createKey,
+    });
+    const [vaultPda] = multisig.getVaultPda({
+      multisigPda,
+      index: 0,
+    });
+    // await multisig.instructions.vaultTransactionCreate({multisigPda,})
   }
   return { createMultisig, getMultisig, getMainVault };
 };

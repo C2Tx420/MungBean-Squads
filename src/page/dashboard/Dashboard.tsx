@@ -89,8 +89,12 @@ export default function Dashboard() {
               <p>{vaultValue} <span>SOL</span></p>
             </div>
             <div className="dashboard__vault-tools">
-              <TransferTools type="deposit" />
-              <TransferTools type="withdraw" />
+              {publicKey &&
+                <>
+                  <TransferTools vaultAddress={vaultAddress} walletAddress={publicKey.toString()} type="deposit" />
+                  <TransferTools type="withdraw" vaultAddress={vaultAddress} walletAddress={publicKey.toString()} />
+                </>
+              }
             </div>
           </div>
 
@@ -99,8 +103,8 @@ export default function Dashboard() {
           <div className="dashboard__content-left">
             <div className="dashboard__content-left-recent">
               <h4>Recent transactions</h4>
-              {historyData && historyData.map((data: any,idx: any)=>(
-                <HistoryTransaction key={idx} data={data}/>
+              {historyData && historyData.map((data: any, idx: any) => (
+                <HistoryTransaction key={idx} data={data} />
               ))}
             </div>
           </div>
