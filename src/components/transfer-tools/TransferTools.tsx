@@ -19,7 +19,7 @@ interface Props {
 function TransferTools({ type, vaultAddress, walletAddress }: Props) {
     const location = useLocation();
     const { sendSol, sign } = useShyft();
-    const { createVaultTransaction, approveProposal, excute } = useSquads();
+    const { createVaultTransaction, approveProposal, excute, createProposal } = useSquads();
     const dispatch = useDispatch();
     const wallet = useWallet();
     const { connection } = useConnection();
@@ -48,7 +48,9 @@ function TransferTools({ type, vaultAddress, walletAddress }: Props) {
 
     const withdraw = async () => {
         if (wallet.publicKey) {
-            const { encoded_transaction } = await createVaultTransaction(wallet.publicKey,new PublicKey(vaultAddress));
+            // const { encoded_transaction } = await createVaultTransaction(wallet.publicKey,new PublicKey(vaultAddress));
+            // await sign(wallet, encoded_transaction, connection);
+            const { encoded_transaction } = await createProposal(wallet.publicKey);
             await sign(wallet, encoded_transaction, connection);
             const { encoded_transaction: encoded_transaction2 } = await approveProposal(wallet.publicKey);
             await sign(wallet, encoded_transaction2, connection);

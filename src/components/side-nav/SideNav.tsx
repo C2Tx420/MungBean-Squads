@@ -20,18 +20,6 @@ export default function SideNav() {
                 </span>
                 Shared Pockets
             </NavLink>
-            <NavLink to='/b' className="sidenav__item">
-                <span>
-                    <RocketIcon height={14} width={14} />
-                </span>
-                Shared Pockets
-            </NavLink>
-            <NavLink to='/c' className="sidenav__item">
-                <span>
-                    <RocketIcon height={14} width={14} />
-                </span>
-                Shared Pockets
-            </NavLink>
         </div>
     )
 }

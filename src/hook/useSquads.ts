@@ -137,6 +137,34 @@ export const useSquads = () => {
     };
   };
 
+  const createProposal = async (pubKey: PublicKey) => {
+    const createKey = pubKey;
+    const creator = pubKey;
+
+    const [multisigPda] = multisig.getMultisigPda({
+      createKey,
+    });
+
+    const transactionIndex = 1n;
+    const sig = await multisig.instructions.proposalCreate({
+      multisigPda,
+      creator,
+      transactionIndex,
+    });
+    const tx = new Transaction();
+    tx.add(sig);
+    tx.feePayer = pubKey;
+    tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+    const serializedTransaction = tx.serialize({
+      requireAllSignatures: false,
+      verifySignatures: true,
+    });
+    const transactionBase64 = serializedTransaction.toString("base64");
+    return {
+      encoded_transaction: transactionBase64,
+    };
+  };
+
   const approveProposal = async (pubKey: PublicKey) => {
     const createKey = pubKey;
     const member = pubKey;
@@ -206,5 +234,6 @@ export const useSquads = () => {
     createVaultTransaction,
     approveProposal,
     excute,
+    createProposal
   };
 };

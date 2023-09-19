@@ -147,10 +147,6 @@ export default function Dashboard() {
             </ResponsiveContainer>
           </div>
         </div>
-
-
-
-
       </ContentBox>
     </div>
   )
