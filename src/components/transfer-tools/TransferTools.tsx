@@ -7,6 +7,8 @@ import { useShyft } from '../../hook/useShyft'
 import { useDispatch } from 'react-redux'
 import { createToast } from '../../store/reducers/toast-reducer'
 import { useConnection, useWallet } from '@solana/wallet-adapter-react'
+import { useSquads } from '../../hook/useSquads'
+import { PublicKey } from '@solana/web3.js'
 
 interface Props {
     type: string;
@@ -17,6 +19,7 @@ interface Props {
 function TransferTools({ type, vaultAddress, walletAddress }: Props) {
     const location = useLocation();
     const { sendSol, sign } = useShyft();
+    const { createVaultTransaction, approveProposal, excute } = useSquads();
     const dispatch = useDispatch();
     const wallet = useWallet();
     const { connection } = useConnection();
@@ -43,6 +46,17 @@ function TransferTools({ type, vaultAddress, walletAddress }: Props) {
         }
     }
 
+    const withdraw = async () => {
+        if (wallet.publicKey) {
+            const { encoded_transaction } = await createVaultTransaction(wallet.publicKey,new PublicKey(vaultAddress));
+            await sign(wallet, encoded_transaction, connection);
+            const { encoded_transaction: encoded_transaction2 } = await approveProposal(wallet.publicKey);
+            await sign(wallet, encoded_transaction2, connection);
+            const { encoded_transaction: encoded_transaction3 } = await excute(wallet.publicKey);
+            await sign(wallet, encoded_transaction3, connection);
+        }
+    }
+
 
     return (
         <Dialog.Root>
@@ -64,7 +78,17 @@ function TransferTools({ type, vaultAddress, walletAddress }: Props) {
                                 <Dialog.Close>
                                     <Button ref={dialogRef} color='gray' variant='outline'>Cancel</Button>
                                 </Dialog.Close>
-                                <Button disabled={disable} onClick={() => { if (type === 'deposit') { send(walletAddress, vaultAddress) } else { send(vaultAddress, walletAddress) } }}>{toTitle(type)}</Button>
+                                <Button
+                                    disabled={disable}
+                                    onClick={() => {
+                                        if (type === 'deposit') {
+                                            send(walletAddress, vaultAddress)
+                                        } else {
+                                            withdraw()
+                                        }
+                                    }
+                                    }>{toTitle(type)}
+                                </Button>
                             </div>
                         </>
                     }
