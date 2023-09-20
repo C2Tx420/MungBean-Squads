@@ -10,6 +10,19 @@ export default function Pockets() {
       <ContentBox>
         <div className="pockets__list">
           <PocketItem/>
+          <PocketItem/>
+          <PocketItem/>
+          <PocketItem/>
+          <PocketItem/>
+          <PocketItem/>
+          <PocketItem/>
+          <PocketItem/>
+          <PocketItem/>
+          <PocketItem/>
+          <PocketItem/>
+          <PocketItem/>
+          <PocketItem/>
+          <PocketItem/>
         </div>
       </ContentBox>
     </div>

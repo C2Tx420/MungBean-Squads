@@ -27,55 +27,6 @@ export function toTitle(value: string) {
 }
 
 export async function historyTransactionConvert(data: any, pubKey: string) {
-  const fakeData = [
-    {
-      timestamp: "2023-09-16T12:12:27.000Z",
-      fee: 0.0000066,
-      fee_payer: "FMGXLmBHASXJYw4DB1Ds2CqKtUH39F8hgMxK8Jrayvun",
-      signers: [
-        "FMGXLmBHASXJYw4DB1Ds2CqKtUH39F8hgMxK8Jrayvun"
-      ],
-      signatures: [
-        "NshTJAjtmC1GZ6cFbPBgmqdkZpk5WTNPmSh1frnu5KVvbNuNQfEipHkSP2ufrSwHVUCVaJiNvRp9cAysaLFc5gc"
-      ],
-      protocol: {
-        address: "11111111111111111111111111111111",
-        name: "SYSTEM_PROGRAM"
-      },
-      type: "SOL_TRANSFER",
-      status: "Success",
-      actions: [
-        {
-          info: {},
-          source_protocol: {
-            address: "ComputeBudget111111111111111111111111111111",
-            name: "COMPUTE_BUDGET"
-          },
-          type: "UNKNOWN"
-        },
-        {
-          info: {},
-          source_protocol: {
-            address: "ComputeBudget111111111111111111111111111111",
-            name: "COMPUTE_BUDGET"
-          },
-          type: "UNKNOWN"
-        },
-        {
-          info: {
-            sender: "FMGXLmBHASXJYw4DB1Ds2CqKtUH39F8hgMxK8Jrayvun",
-            receiver: "GpEdNtVFcThFYeMFEveD6Q8rJnDvcFW7J4dDmEGK4UX1",
-            amount: "0.100000000"
-          },
-          source_protocol: {
-            address: "11111111111111111111111111111111",
-            name: "SYSTEM_PROGRAM"
-          },
-          type: "SOL_TRANSFER"
-        }
-      ]
-    },
-  ]
 
   const result: any = [];
 

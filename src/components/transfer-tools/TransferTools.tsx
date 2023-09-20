@@ -48,14 +48,14 @@ function TransferTools({ type, vaultAddress, walletAddress }: Props) {
 
     const withdraw = async () => {
         if (wallet.publicKey) {
-            // const { encoded_transaction } = await createVaultTransaction(wallet.publicKey,new PublicKey(vaultAddress));
-            // await sign(wallet, encoded_transaction, connection);
-            const { encoded_transaction } = await createProposal(wallet.publicKey);
+            const { encoded_transaction } = await createVaultTransaction(wallet.publicKey,new PublicKey(vaultAddress));
             await sign(wallet, encoded_transaction, connection);
-            const { encoded_transaction: encoded_transaction2 } = await approveProposal(wallet.publicKey);
+            const { encoded_transaction: encoded_transaction2 } = await createProposal(wallet.publicKey);
             await sign(wallet, encoded_transaction2, connection);
-            const { encoded_transaction: encoded_transaction3 } = await excute(wallet.publicKey);
+            const { encoded_transaction: encoded_transaction3 } = await approveProposal(wallet.publicKey);
             await sign(wallet, encoded_transaction3, connection);
+            const { encoded_transaction: encoded_transaction4 } = await excute(wallet.publicKey);
+            await sign(wallet, encoded_transaction4, connection);
         }
     }
 
