@@ -227,6 +227,10 @@ export const useSquads = () => {
     };
   };
 
+  const addMember = async() => {
+    // multisig.instructions.multisigAddMember({multisigPda,configAuthority,newMember})
+  }
+
   return {
     createMultisig,
     getMultisig,
