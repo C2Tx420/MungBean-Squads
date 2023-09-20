@@ -17,8 +17,16 @@
             font-weight: 500;
         }
 
+        &-type{
+            width: 100px;
+        }
+
         &-time {
             color: var(--gray-a10);
+        }
+
+        &-value{
+            width: 80px;
         }
     }
 }

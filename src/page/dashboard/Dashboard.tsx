@@ -47,26 +47,20 @@ export default function Dashboard() {
 
   const data = [
     {
-      uv: 2,
-    },
-    {
-      uv: 4,
-    },
-    {
-      uv: 1,
-    },
-    {
       uv: 0,
     },
     {
-      uv: 7,
-    },
-    {
       uv: 1,
     },
     {
-      uv: 5,
+      uv: 0.4,
     },
+    {
+      uv: 0.5,
+    },
+    {
+      uv: 1.2,
+    }
   ];
 
   return (
@@ -116,8 +110,8 @@ export default function Dashboard() {
               >
                 <defs>
                   <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#F97316" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="#F97316" stopOpacity={0} />
+                    <stop offset="5%" stopColor="#00a3ff" stopOpacity={0.8} />
+                    <stop offset="95%" stopColor="#00a3ff" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <YAxis domain={["auto", "auto"]} orientation="left" />
@@ -137,7 +131,7 @@ export default function Dashboard() {
                 <Area
                   type="monotone"
                   dataKey="uv"
-                  stroke="#F97316"
+                  stroke="#00a3ff"
                   fillOpacity={1}
                   strokeWidth={3}
                   fill="url(#colorUv)"
