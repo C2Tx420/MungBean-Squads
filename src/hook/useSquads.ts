@@ -201,10 +201,10 @@ export const useSquads = () => {
       createKey,
     });
     const transactionIndex = 1n;
-    const [proposalPda] = multisig.getProposalPda({
-      multisigPda,
-      transactionIndex,
-    });
+    // const [proposalPda] = multisig.getProposalPda({
+    //   multisigPda,
+    //   transactionIndex,
+    // });
 
     const sig = await multisig.instructions.vaultTransactionExecute({
       connection,
