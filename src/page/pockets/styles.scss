@@ -1,8 +1,9 @@
 .pockets {
-    &__title {
+    &__heading{
         margin: 10px 0;
+        display: flex;
+        justify-content: space-between;
     }
-
     .content-box {
         height: 75vh;
         overflow-y: scroll;

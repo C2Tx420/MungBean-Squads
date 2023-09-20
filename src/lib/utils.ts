@@ -44,8 +44,6 @@ export async function historyTransactionConvert(data: any, pubKey: string) {
 
   const groupedTransaction: any = {};
 
-  console.log(data);
-
   await data.map((item: any) => {
     const dateTime = new Date(item.timestamp).toISOString().split("T");
 

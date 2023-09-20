@@ -70,7 +70,7 @@ export const useSquads = () => {
       multisigPda,
       index: 0,
     });
-    console.log(vaultPda.toString());
+    // console.log(vaultPda.toString());
     return vaultPda.toString();
   };
 
