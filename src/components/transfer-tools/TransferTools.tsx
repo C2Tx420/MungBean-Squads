@@ -6,7 +6,7 @@ import './style.scss'
 import { useShyft } from '../../hook/useShyft'
 import { useDispatch } from 'react-redux'
 import { createToast } from '../../store/reducers/toast-reducer'
-import { useConnection, useWallet } from '@solana/wallet-adapter-react'
+import { useWallet } from '@solana/wallet-adapter-react'
 import { useSquads } from '../../hook/useSquads'
 import { PublicKey } from '@solana/web3.js'
 
@@ -19,10 +19,9 @@ interface Props {
 function TransferTools({ type, vaultAddress, walletAddress }: Props) {
     const location = useLocation();
     const { sendSol, sign } = useShyft();
-    const { createVaultTransaction, approveProposal, excute, createProposal } = useSquads();
+    const { withdraw } = useSquads();
     const dispatch = useDispatch();
     const wallet = useWallet();
-    const { connection } = useConnection();
     const [value, setValue] = useState<any>();
     const [disable, setDisable] = useState(false);
     const dialogRef: any = useRef(null);
@@ -32,7 +31,7 @@ function TransferTools({ type, vaultAddress, walletAddress }: Props) {
         if (value) {
             try {
                 const tx = await sendSol(fromAddress, toAddress, Number(value));
-                await sign(wallet, tx, connection)
+                await sign(wallet, tx)
             } catch (e) {
                 dispatch(createToast({
                     type: 'error', title: `${toTitle(type)} failed`,
@@ -46,17 +45,9 @@ function TransferTools({ type, vaultAddress, walletAddress }: Props) {
         }
     }
 
-    const withdraw = async () => {
-        if (wallet.publicKey) {
-            const { encoded_transaction } = await createVaultTransaction(wallet.publicKey,new PublicKey(vaultAddress));
-            await sign(wallet, encoded_transaction, connection);
-            const { encoded_transaction: encoded_transaction2 } = await createProposal(wallet.publicKey);
-            await sign(wallet, encoded_transaction2, connection);
-            const { encoded_transaction: encoded_transaction3 } = await approveProposal(wallet.publicKey);
-            await sign(wallet, encoded_transaction3, connection);
-            const { encoded_transaction: encoded_transaction4 } = await excute(wallet.publicKey);
-            await sign(wallet, encoded_transaction4, connection);
-        }
+    const handleWithdraw = async () => {
+        const encoded_transaction = await withdraw(new PublicKey(vaultAddress));
+        await sign(wallet, encoded_transaction)
     }
 
 
@@ -86,7 +77,7 @@ function TransferTools({ type, vaultAddress, walletAddress }: Props) {
                                         if (type === 'deposit') {
                                             send(walletAddress, vaultAddress)
                                         } else {
-                                            withdraw()
+                                            handleWithdraw()
                                         }
                                     }
                                     }>{toTitle(type)}
