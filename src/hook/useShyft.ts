@@ -1,9 +1,11 @@
 import { ShyftSdk, Network } from '@shyft-to/js';
-import { Connection, Transaction } from '@solana/web3.js';
+import { useConnection } from '@solana/wallet-adapter-react';
+import { Transaction } from '@solana/web3.js';
 
 const shyft = new ShyftSdk({ apiKey: import.meta.env.VITE_SHYFT_API_KEY, network: Network.Devnet });
 
 export const useShyft = () => {
+    const {connection} = useConnection();
     const getBalance = async (pubKey: string) => {
         return await shyft.wallet.getBalance({wallet:pubKey})
     }
@@ -16,7 +18,7 @@ export const useShyft = () => {
         return await shyft.wallet.sendSol({fromAddress,toAddress,amount})
     }
     
-    const sign = async(wallet: any,tx: any,connection: Connection) => {
+    const sign = async(wallet: any,tx: any) => {
         const recoveredTransaction = Transaction.from(Buffer.from(tx, 'base64'));
         const signedTx = await wallet.signTransaction(recoveredTransaction);
         const confirmTransaction = await connection.sendRawTransaction(signedTx.serialize(),{skipPreflight: true});

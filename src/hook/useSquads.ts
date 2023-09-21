@@ -4,6 +4,7 @@ import {
 } from "@solana/wallet-adapter-react";
 import {
   Connection,
+  Keypair,
   LAMPORTS_PER_SOL,
   PublicKey,
   SystemProgram,
@@ -227,9 +228,38 @@ export const useSquads = () => {
     };
   };
 
-  const addMember = async() => {
-    // multisig.instructions.multisigAddMember({multisigPda,configAuthority,newMember})
-  }
+  const addMember = async (pubKey: PublicKey) => {
+    const { Permissions } = multisig.types;
+
+    const multisigPda = multisig.getMultisigPda({
+      createKey: pubKey,
+    })[0];
+
+    const member = Keypair.generate().publicKey;
+
+    const sig = multisig.instructions.multisigAddMember({
+      multisigPda,
+      configAuthority: pubKey,
+      rentPayer: pubKey,
+      newMember: {
+        key: member,
+        permissions: Permissions.all(),
+      },
+    });
+
+    const tx = new Transaction();
+    tx.add(sig);
+    tx.feePayer = pubKey;
+    tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+    const serializedTransaction = tx.serialize({
+      requireAllSignatures: false,
+      verifySignatures: true,
+    });
+    const transactionBase64 = serializedTransaction.toString("base64");
+    return {
+      encoded_transaction: transactionBase64,
+    };
+  };
 
   return {
     createMultisig,
@@ -238,6 +268,7 @@ export const useSquads = () => {
     createVaultTransaction,
     approveProposal,
     excute,
-    createProposal
+    createProposal,
+    addMember
   };
 };
