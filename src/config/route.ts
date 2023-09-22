@@ -5,6 +5,7 @@ import NotFound from "../page/notfound";
 import Dashboard from "../page/dashboard/Dashboard";
 import pockets from "../page/pockets";
 import Home from "../page/home/Home";
+import Community from "../page/community";
 
 export const routeList: Array<routeModel> = [
   {
@@ -14,6 +15,8 @@ export const routeList: Array<routeModel> = [
   {
     element: privateRoute,
     children: [
+      { path: '/community',
+      element: Community },
       {
         element: DefaultLayout,
         children: [

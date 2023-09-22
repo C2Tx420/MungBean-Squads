@@ -6,9 +6,8 @@ import './style.scss';
 export default function PrivateHeader() {
     return (
         <header className="header">
-            <Link to={'/'}>
-                <img src="/mungbean.png" width={40}
-                    height={40} />
+            <Link to={'/'} style={{ height: 40, width: 40 }}>
+                <img src="/mungbean.png" />
             </Link>
             <div className="header__right">
                 <ToggleTheme />
