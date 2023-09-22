@@ -5,14 +5,13 @@ import './style.scss'
 import { Container } from '@radix-ui/themes'
 import { useEffect, useState } from 'react'
 import { useSquads } from '../../../hook/useSquads'
-import { useConnection, useWallet } from '@solana/wallet-adapter-react'
+import { useWallet } from '@solana/wallet-adapter-react'
 import { useDispatch } from 'react-redux'
 import { createToast } from '../../../store/reducers/toast-reducer'
 import Loading from '../../loading'
 
 export default function DefaultLayout() {
   const { getMultisig, createMultisig } = useSquads();
-  const { connection } = useConnection();
   const wallet = useWallet();
   const [hasMultisig, setHasMultisig] = useState<boolean>(false);
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ export default function DefaultLayout() {
   useEffect(() => {
     (async () => {
       if (wallet.publicKey) {
-        const multisig = await getMultisig(connection, wallet.publicKey);
+        const multisig = await getMultisig();
         if (multisig) {
           setHasMultisig(true)
         } else {
