@@ -14,10 +14,11 @@ interface Props {
     type: string;
     vaultAddress: string;
     walletAddress: string;
-    fetchData?: any
+    fetchData?: any;
+    vaultIndex?: number
 }
 
-function TransferTools({ type, vaultAddress, walletAddress, fetchData }: Props) {
+function TransferTools({ type, vaultAddress, walletAddress, fetchData, vaultIndex = 0 }: Props) {
     const location = useLocation();
     const { sendSol, sign } = useShyft();
     const { withdraw, excute } = useSquads();
@@ -35,10 +36,10 @@ function TransferTools({ type, vaultAddress, walletAddress, fetchData }: Props) 
                     const tx = await sendSol(fromAddress, toAddress, Number(value));
                     await sign(wallet, tx)
                 } else {
-                    const withdrawData = await withdraw(new PublicKey(vaultAddress), value);
-                    await sign(wallet, withdrawData?.transactionBase64)
+                    const withdrawData = await withdraw(new PublicKey(vaultAddress), value, vaultIndex);
+                    await sign(wallet, withdrawData?.transactionBase64);
                     await timeout(1000);
-                    await excute(wallet.publicKey, withdrawData?.transactionIndex)
+                    await excute(wallet.publicKey, withdrawData?.transactionIndex);
                 }
             } catch (e) {
                 dispatch(createToast({
