@@ -5,6 +5,7 @@ import { useShyft } from "../../hook/useShyft";
 import * as Progress from '@radix-ui/react-progress';
 import { PublicKey } from "@solana/web3.js";
 import './style.scss'
+import { useNavigate } from "react-router-dom";
 
 
 export default function CommunityItem({ data }: any) {
@@ -13,6 +14,7 @@ export default function CommunityItem({ data }: any) {
     const [progress, setProgress] = useState(0)
     const { getVaultAddress } = useSquads();
     const { getBalance } = useShyft();
+    const navigate = useNavigate();
 
     const fetchData = async () => {
         const vaultAddress = await getVaultAddress(new PublicKey(data.createKey), data.vaultIndex);
@@ -25,8 +27,12 @@ export default function CommunityItem({ data }: any) {
     useEffect(() => {
         fetchData();
     }, [])
+
+    const handleChangeRoute = () => {
+        navigate(`/community/${data.address}`,{state: data})
+    }
     return (
-        <div className="community-item">
+        <div className="community-item" onClick={handleChangeRoute}>
             <div className="pocket-item">
                 <div className="pocket-item__img">
                     <img src={data.img} alt="" />
