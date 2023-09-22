@@ -20,30 +20,29 @@ export default function Dashboard() {
 
   useEffect(() => {
     (async () => {
-      if (publicKey) {
-        const address = await getMainVault(publicKey);
-        setVaultAddress(address)
-      }
-
+      await fetchData();
     })()
-  }, [publicKey])
+  }, [publicKey, vaultAddress])
+  const fetchData = async () => {
+    if(publicKey) {
+      const address = await getMainVault(publicKey);
+      setVaultAddress(address);
 
-  useEffect(() => {
-    (async () => {
-      if (vaultAddress) {
+      if(vaultAddress) {
         const balance = await getBalance(vaultAddress);
         setVaultValue(balance);
-
+    
         await timeout(1000);
-
+    
         const history = await getHistoryTransaction(vaultAddress);
-
+    
         historyTransactionConvert(history, vaultAddress);
-
+    
         setHistoryData(await historyTransactionConvert(history, vaultAddress));
       }
-    })()
-  }, [vaultAddress])
+  
+    }
+  }
 
   const data = [
     {
@@ -85,8 +84,8 @@ export default function Dashboard() {
             <div className="dashboard__vault-tools">
               {publicKey &&
                 <>
-                  <TransferTools vaultAddress={vaultAddress} walletAddress={publicKey.toString()} type="deposit" />
-                  <TransferTools type="withdraw" vaultAddress={vaultAddress} walletAddress={publicKey.toString()} />
+                  <TransferTools fetchData={fetchData} vaultAddress={vaultAddress} walletAddress={publicKey.toString()} type="deposit" />
+                  <TransferTools fetchData={fetchData} type="withdraw" vaultAddress={vaultAddress} walletAddress={publicKey.toString()} />
                 </>
               }
             </div>

@@ -1,5 +1,5 @@
 import { Button, Dialog, TextField } from '@radix-ui/themes'
-import { toTitle } from '../../lib/utils'
+import { timeout, toTitle } from '../../lib/utils'
 import { useLocation } from 'react-router-dom'
 import React, { useRef, useState } from 'react'
 import './style.scss'
@@ -14,24 +14,32 @@ interface Props {
     type: string;
     vaultAddress: string;
     walletAddress: string;
+    fetchData?: any
 }
 
-function TransferTools({ type, vaultAddress, walletAddress }: Props) {
+function TransferTools({ type, vaultAddress, walletAddress, fetchData }: Props) {
     const location = useLocation();
     const { sendSol, sign } = useShyft();
-    const { withdraw } = useSquads();
+    const { withdraw, excute } = useSquads();
     const dispatch = useDispatch();
     const wallet = useWallet();
     const [value, setValue] = useState<any>();
     const [disable, setDisable] = useState(false);
     const dialogRef: any = useRef(null);
 
-    const send = async (fromAddress: string, toAddress: string) => {
+    const handleTransfer = async (fromAddress: string, toAddress: string) => {
         setDisable(true);
-        if (value) {
+        if (value && wallet.publicKey) {
             try {
-                const tx = await sendSol(fromAddress, toAddress, Number(value));
-                await sign(wallet, tx)
+                if (type === 'deposit') {
+                    const tx = await sendSol(fromAddress, toAddress, Number(value));
+                    await sign(wallet, tx)
+                } else {
+                    const withdrawData = await withdraw(new PublicKey(vaultAddress), value);
+                    await sign(wallet, withdrawData?.transactionBase64)
+                    await timeout(1000);
+                    await excute(wallet.publicKey, withdrawData?.transactionIndex)
+                }
             } catch (e) {
                 dispatch(createToast({
                     type: 'error', title: `${toTitle(type)} failed`,
@@ -39,15 +47,12 @@ function TransferTools({ type, vaultAddress, walletAddress }: Props) {
                 }))
                 console.log(e)
             } finally {
-                await setDisable(false);
+                setDisable(false);
+                fetchData()
+                setValue(null)
                 dialogRef.current.click();
             }
         }
-    }
-
-    const handleWithdraw = async () => {
-        const encoded_transaction = await withdraw(new PublicKey(vaultAddress));
-        await sign(wallet, encoded_transaction)
     }
 
 
@@ -74,11 +79,7 @@ function TransferTools({ type, vaultAddress, walletAddress }: Props) {
                                 <Button
                                     disabled={disable}
                                     onClick={() => {
-                                        if (type === 'deposit') {
-                                            send(walletAddress, vaultAddress)
-                                        } else {
-                                            handleWithdraw()
-                                        }
+                                        handleTransfer(walletAddress, vaultAddress)
                                     }
                                     }>{toTitle(type)}
                                 </Button>
