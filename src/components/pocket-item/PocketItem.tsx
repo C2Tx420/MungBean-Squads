@@ -7,14 +7,16 @@ interface Props {
 }
 
 export default function PocketItem({ data }: Props) {
+  console.log(data)
   return (
     <Dialog.Root>
       <Dialog.Trigger>
         <div className="pocket-item">
           <div className="pocket-item__img">
+            <img src={data.img} alt="" />
           </div>
           <div className="pocket-item__content">
-            <p className='pocket-item__content-name'>Investment</p>
+            <p className='pocket-item__content-name'>{data.name}</p>
             <p className='pocket-item__content-addr'>{truncateWallet('Pocket Address')}</p>
             <p className='pocket-item__content-balance'>0/100 SOL</p>
           </div>

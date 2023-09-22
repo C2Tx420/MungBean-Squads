@@ -14,6 +14,7 @@ import {
 import * as multisig from "@sqds/multisig";
 import { Permissions } from "@sqds/multisig/lib/types";
 import { useShyft } from "./useShyft";
+import { timeout } from "../lib/utils";
 
 export const useSquads = () => {
   const { connection } = useConnection();
@@ -112,17 +113,6 @@ export const useSquads = () => {
       instructions: [transferInstruction],
     });
 
-    // await multisig.rpc.vaultTransactionCreate({
-    //   connection,
-    //   feePayer,
-    //   multisigPda,
-    //   transactionIndex,
-    //   creator: feePayer.publicKey,
-    //   vaultIndex: 0,
-    //   ephemeralSigners: 0,
-    //   transactionMessage: testTransferMessage,
-    // });
-
     const sig = multisig.instructions.vaultTransactionCreate({
       multisigPda,
       transactionIndex,
@@ -189,17 +179,19 @@ export const useSquads = () => {
       member: pubKey,
     });
 
-    const tx = new Transaction();
-      tx.add(sig.instruction);
-      tx.feePayer = pubKey;
-      tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
-      const serializedTransaction = tx.serialize({
-        requireAllSignatures: false,
-        verifySignatures: true,
-      });
-      const transactionBase64 = serializedTransaction.toString("base64");
+    console.log(sig)
 
-      await sign(wallet, transactionBase64);
+    const tx = new Transaction();
+    tx.add(sig.instruction);
+    tx.feePayer = pubKey;
+    tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+    const serializedTransaction = tx.serialize({
+      requireAllSignatures: false,
+      verifySignatures: true,
+    });
+    const transactionBase64 = serializedTransaction.toString("base64");
+
+    await sign(wallet, transactionBase64);
   };
 
   const addMember = async (pubKey: PublicKey) => {
@@ -213,10 +205,12 @@ export const useSquads = () => {
 
     const multisigData: any = await getMultisig();
 
+    const transactionIndex = multisigData.transactionIndex.words[0] + 1;
+
     const sig = await multisig.instructions.configTransactionCreate({
       multisigPda,
       creator: pubKey,
-      transactionIndex: multisigData.transactionIndex.words.length,
+      transactionIndex,
       actions: [
         {
           __kind: "AddMember",
@@ -228,8 +222,21 @@ export const useSquads = () => {
       ],
     });
 
+    const createProposalSig = await createProposal(pubKey,transactionIndex);
+    const approveProposalSig = await approveProposal(pubKey,transactionIndex);
+
+    const excuteSig = await multisig.instructions.configTransactionExecute({
+      multisigPda,
+      transactionIndex,
+      member: pubKey,
+      rentPayer: pubKey
+    });
+
     const tx = new Transaction();
     tx.add(sig);
+    tx.add(createProposalSig);
+    tx.add(approveProposalSig);
+    tx.add(excuteSig);
     tx.feePayer = pubKey;
     tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
     const serializedTransaction = tx.serialize({
@@ -237,9 +244,8 @@ export const useSquads = () => {
       verifySignatures: true,
     });
     const transactionBase64 = serializedTransaction.toString("base64");
-    return {
-      encoded_transaction: transactionBase64,
-    };
+
+    await sign(wallet, transactionBase64);
   };
 
   const withdraw = async (vaultPda: PublicKey, value: number) => {
@@ -270,8 +276,8 @@ export const useSquads = () => {
         verifySignatures: true,
       });
       const transactionBase64 = serializedTransaction.toString("base64");
-      
-      return {transactionBase64, transactionIndex};
+
+      return { transactionBase64, transactionIndex };
     }
   };
 
