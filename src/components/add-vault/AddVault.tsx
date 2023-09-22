@@ -10,7 +10,7 @@ export default function AddVault() {
     const { get, set } = useLocalStorage();
     const wallet = useWallet();
     const { sign } = useShyft();
-    const [form, setForm] = useState({ name: '', desc: '', img: '', public: false });
+    const [form, setForm] = useState({ name: '', desc: '', img: '', target: '', public: false });
     const handleAddVault = async () => {
         if (wallet.publicKey) {
             await addMember(wallet.publicKey);
@@ -44,6 +44,12 @@ export default function AddVault() {
                             Image
                         </Text>
                         <TextField.Input value={form.img} onChange={(ev) => setForm((prev) => ({ ...prev, img: ev.currentTarget.value }))} placeholder='url image' />
+                    </label>
+                    <label>
+                        <Text as="div" size="2" mb="1" weight="bold">
+                            Target
+                        </Text>
+                        <TextField.Input value={form.target} onChange={(ev) => setForm((prev) => ({ ...prev, target: ev.currentTarget.value }))} placeholder="Target" />
                     </label>
                     <label>
                         <Text as="div" size="2" mb="1" weight="bold">

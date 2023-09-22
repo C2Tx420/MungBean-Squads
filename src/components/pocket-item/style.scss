@@ -6,28 +6,65 @@
     flex-direction: column;
     gap: 10px;
     width: calc(25% - 7.5px);
-    height: 24vh;
+    height: 30vh;
 
     cursor: pointer;
     transition: all .2s;
 
-    &__img{
+    &__img {
         width: 100%;
         height: 70%;
         background-color: #ccc;
         border-radius: 12px;
         overflow: hidden;
-        img{
+
+        img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
     }
-    &__content{
+
+    &__content {
         flex: 1;
+
+        &-name {
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+
+        &-addr {
+            font-size: 1.2rem;
+            color: #919191bd;
+            font-weight: 500;
+        }
+
+        &-balance {
+            span {
+                font-weight: 700;
+            }
+        }
     }
-    &:hover{
+
+    &:hover {
         opacity: .8;
         transition: all .2s;
+    }
+
+    &__detail {
+        &-title {
+            span {
+                font-size: 1.4rem;
+                color: #919191bd;
+                font-weight: 500;
+            }
+        }
+
+        &-btn-wrapper {
+            button {
+                width: calc(50% - var(--space-2));
+                cursor: pointer;
+            }
+        }
     }
 }

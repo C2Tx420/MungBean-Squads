@@ -69,23 +69,19 @@ function TransferTools({ type, vaultAddress, walletAddress, fetchData }: Props) 
             <Dialog.Content style={{ maxWidth: 500 }}>
                 <Dialog.Title className='transfer-tools__title'>{toTitle(type)}</Dialog.Title>
                 <div className='transfer-tools__desc'>
-                    {location.pathname === '/dashboard' &&
-                        <>
-                            <TextField.Input placeholder="SOL Value" value={value || ''} onChange={(e) => setValue(e.currentTarget.value)} />
-                            <div className="transfer-tools__desc-btn">
-                                <Dialog.Close>
-                                    <Button ref={dialogRef} color='gray' variant='outline'>Cancel</Button>
-                                </Dialog.Close>
-                                <Button
-                                    disabled={disable}
-                                    onClick={() => {
-                                        handleTransfer(walletAddress, vaultAddress)
-                                    }
-                                    }>{toTitle(type)}
-                                </Button>
-                            </div>
-                        </>
-                    }
+                    <TextField.Input placeholder="SOL Value" value={value || ''} onChange={(e) => setValue(e.currentTarget.value)} />
+                    <div className="transfer-tools__desc-btn">
+                        <Dialog.Close>
+                            <Button ref={dialogRef} color='gray' variant='outline'>Cancel</Button>
+                        </Dialog.Close>
+                        <Button
+                            disabled={disable}
+                            onClick={() => {
+                                handleTransfer(walletAddress, vaultAddress)
+                            }
+                            }>{toTitle(type)}
+                        </Button>
+                    </div>
                 </div>
             </Dialog.Content>
         </Dialog.Root>
