@@ -4,6 +4,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { useShyft } from '../../hook/useShyft';
 import { useEffect, useState } from 'react';
 import { useLocalStorage } from '../../hook/useLocalStorage';
+import { genVaultIndex } from '../../lib/utils';
 
 export default function AddVault() {
     const { addMember, excute } = useSquads();
@@ -13,9 +14,10 @@ export default function AddVault() {
     const [form, setForm] = useState({ name: '', desc: '', img: '', target: '', public: false });
     const handleAddVault = async () => {
         if (wallet.publicKey) {
-            await addMember(wallet.publicKey);
-            // const vaultListStorage: any = get('vaults');
-            // set('vaults', JSON.stringify({ ...vaultListStorage, '111': form }))
+            const address = await addMember(wallet.publicKey);
+            const vaultListStorage: any = get('vaults');
+            const vaultIndex = genVaultIndex(JSON.parse(vaultListStorage));
+            set('vaults', JSON.stringify({ ...vaultListStorage, [address]: {...form, vaultIndex} }))
         }
     }
     return (

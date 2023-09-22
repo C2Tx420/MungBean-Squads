@@ -245,6 +245,8 @@ export const useSquads = () => {
     const transactionBase64 = serializedTransaction.toString("base64");
 
     await sign(wallet, transactionBase64);
+
+    return member.toString();
   };
 
   const withdraw = async (vaultPda: PublicKey, value: number, vaultIndex: number) => {
