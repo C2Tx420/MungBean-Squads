@@ -18,7 +18,7 @@ export default function SideNav() {
                 <span>
                     <RocketIcon height={14} width={14} />
                 </span>
-                Shared Pockets
+                Vaults
             </NavLink>
         </div>
     )
