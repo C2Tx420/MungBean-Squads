@@ -59,19 +59,19 @@ export default function CommunityDetail() {
                                 <Progress.Root className="ProgressRoot" value={progress}>
                                     <Progress.Indicator
                                         className="ProgressIndicator"
-                                        style={{ transform: `translateX(-${Number(data.target) - progress}%)` }}
+                                        style={{ transform: `translateX(${(progress * 100) / Number(data.target) - 100 }%)` }}
                                     />
                                 </Progress.Root>
-                                {wallet.publicKey &&
-                                    <div className="detail__left-transfer">
+                                <div className="detail__left-transfer">
+                                    {wallet.publicKey &&
                                         <div className="detail__left-transfer-btn">
                                             <TransferTools fetchData={fetchData} type="deposit" vaultAddress={vaultAddress} walletAddress={wallet.publicKey.toString()} />
                                         </div>
-                                        <div className="detail__left-transfer-btn">
-                                            <QrTransfer />
-                                        </div>
+                                    }
+                                    <div className="detail__left-transfer-btn">
+                                        <QrTransfer />
                                     </div>
-                                }
+                                </div>
                             </div>
                             <div className="detail__content">
                                 <h2 className="detail__content-title">

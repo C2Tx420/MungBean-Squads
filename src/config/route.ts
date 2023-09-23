@@ -15,16 +15,16 @@ export const routeList: Array<routeModel> = [
     element: Home,
   },
   {
+    path: '/community',
+    element: Community,
+  },
+  {
+    path: '/community/:id',
+    element: CommunityDetail
+  },
+  {
     element: PrivateRoute,
     children: [
-      {
-        path: '/community',
-        element: Community,
-      },
-      {
-        path: '/community/:id',
-        element: CommunityDetail
-      },
       {
         element: DefaultLayout,
         children: [

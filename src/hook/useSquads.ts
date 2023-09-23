@@ -48,8 +48,15 @@ export const useSquads = () => {
 
       const tx = new Transaction();
       tx.add(signature);
-      await wallet.sendTransaction(tx, connection);
-      await wallet.signTransaction?.(tx);
+      tx.feePayer = wallet.publicKey;
+      tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+      const serializedTransaction = tx.serialize({
+        requireAllSignatures: false,
+        verifySignatures: true,
+      });
+      const transactionBase64 = serializedTransaction.toString("base64");
+
+      await sign(wallet, transactionBase64);
     }
     // console.log(signature.keys[0].pubkey.toString());
   };

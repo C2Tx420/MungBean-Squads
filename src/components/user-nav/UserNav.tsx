@@ -4,6 +4,7 @@ import { useCopyToClipboard } from "react-use"
 import { createAvatarURL, truncateWallet } from '../../lib/utils';
 import { CopyIcon, ExitIcon } from '@radix-ui/react-icons';
 import './style.scss';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 export default function UserNav() {
     const { disconnect, publicKey } = useWallet();
@@ -12,7 +13,7 @@ export default function UserNav() {
     state
     return (
         <>
-            {publicKey && (
+            {publicKey ? (
                 <DropdownMenu.Root>
                     <DropdownMenu.Trigger>
                         <Button variant="ghost" className="usernav__avatar" color='gray'>
@@ -38,7 +39,8 @@ export default function UserNav() {
                         </DropdownMenu.Item>
                     </DropdownMenu.Content>
                 </DropdownMenu.Root>
-            )}
+            ) :
+                <WalletMultiButton />}
         </>
     )
 }

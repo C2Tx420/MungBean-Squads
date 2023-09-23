@@ -41,8 +41,8 @@ export default function Pockets() {
   return (
     <div className="pockets">
       <div className="pockets__heading">
-        <h2 className="pocket__heading-Title">Pockets</h2>
-        <AddVault />
+        <h2 className="pocket__heading-Title">Vaults</h2>
+        <AddVault fetchData={fetchData} />
       </div>
       <ContentBox>
         <div className="pockets__list">

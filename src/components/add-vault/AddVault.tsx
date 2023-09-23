@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useLocalStorage } from '../../hook/useLocalStorage';
 import { genVaultIndex } from '../../lib/utils';
 
-export default function AddVault() {
+export default function AddVault({ fetchData }: any) {
     const { addMember, getVaultAddress } = useSquads();
     const { get, set } = useLocalStorage();
     const wallet = useWallet();
@@ -16,9 +16,13 @@ export default function AddVault() {
         if (wallet.publicKey) {
             // const address = await addMember(wallet.publicKey);
             const vaultListStorage: any = get('vaults');
+            const vaultListData = JSON.parse(vaultListStorage);
             const vaultIndex = genVaultIndex(JSON.parse(vaultListStorage));
-            const address = await getVaultAddress(wallet.publicKey,vaultIndex)
-            set('vaults', JSON.stringify(vaultListStorage ? [...vaultListStorage, { ...form, vaultIndex, createKey: wallet.publicKey, address}] : [{ ...form, vaultIndex, createKey: wallet.publicKey, address}]))
+            const address = await getVaultAddress(wallet.publicKey, vaultIndex)
+            console.log(vaultListStorage)
+            set('vaults', JSON.stringify(vaultListData ? [...vaultListData, { ...form, vaultIndex, createKey: wallet.publicKey, address }] : [{ ...form, vaultIndex, createKey: wallet.publicKey, address }]))
+            fetchData()
+            setForm({ name: '', desc: '', img: '', target: '', public: false })
         }
     }
     return (
@@ -60,7 +64,9 @@ export default function AddVault() {
                         </Text>
                         <Switch radius='full' checked={form.public} onClick={() => setForm((prev) => ({ ...prev, public: !prev.public }))} />
                     </label>
-                    <Button onClick={handleAddVault}>Add</Button>
+                    <Dialog.Close>
+                        <Button onClick={handleAddVault}>Add</Button>
+                    </Dialog.Close>
                 </Flex>
             </Dialog.Content>
         </Dialog.Root>
