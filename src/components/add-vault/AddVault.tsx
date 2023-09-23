@@ -18,7 +18,7 @@ export default function AddVault() {
             const vaultListStorage: any = get('vaults');
             const vaultIndex = genVaultIndex(JSON.parse(vaultListStorage));
             const address = await getVaultAddress(wallet.publicKey,vaultIndex)
-            set('vaults', JSON.stringify([...vaultListStorage, { ...form, vaultIndex, createKey: wallet.publicKey, address}]))
+            set('vaults', JSON.stringify(vaultListStorage ? [...vaultListStorage, { ...form, vaultIndex, createKey: wallet.publicKey, address}] : [{ ...form, vaultIndex, createKey: wallet.publicKey, address}]))
         }
     }
     return (

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import './style.scss'
-import { HomeIcon, RocketIcon } from '@radix-ui/react-icons'
+import { CubeIcon, GearIcon, HomeIcon, RocketIcon } from '@radix-ui/react-icons'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
 
@@ -19,6 +19,12 @@ export default function SideNav() {
                     <RocketIcon height={14} width={14} />
                 </span>
                 Vaults
+            </NavLink>
+            <NavLink to='/config' className="sidenav__item">
+                <span>
+                    <GearIcon height={14} width={14}/>
+                </span>
+                Config
             </NavLink>
         </div>
     )

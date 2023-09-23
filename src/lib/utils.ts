@@ -123,5 +123,9 @@ export const scroolUp = () => {
 };
 
 export const genVaultIndex = (arr: any) => {
-  return arr[arr.length - 1].vaultIndex + 1;
+  if(arr?.length) {
+    return arr[arr?.length - 1].vaultIndex + 1;
+  }else{
+    return 1;
+  }
 }

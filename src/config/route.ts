@@ -1,12 +1,13 @@
 import DefaultLayout from "../components/layout/default-layout/DefaultLayout";
-import privateRoute from "../components/private-route";
+import PrivateRoute from "../components/private-route";
 import { routeModel } from "../types/route.model";
 import NotFound from "../page/notfound";
 import Dashboard from "../page/dashboard/Dashboard";
-import pockets from "../page/pockets";
+import Pockets from "../page/pockets";
 import Home from "../page/home/Home";
 import Community from "../page/community";
 import CommunityDetail from "../page/community-detail/CommunityDetail";
+import Config from "../page/config";
 
 export const routeList: Array<routeModel> = [
   {
@@ -14,7 +15,7 @@ export const routeList: Array<routeModel> = [
     element: Home,
   },
   {
-    element: privateRoute,
+    element: PrivateRoute,
     children: [
       {
         path: '/community',
@@ -32,8 +33,12 @@ export const routeList: Array<routeModel> = [
             path: "/dashboard",
           },
           {
-            element: pockets,
+            element: Pockets,
             path: "/pockets",
+          },
+          {
+            element: Config,
+            path: "/config",
           },
         ],
       },

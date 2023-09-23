@@ -65,6 +65,7 @@ export const useSquads = () => {
           connection,
           multisigPda
         );
+        console.log(result)
         return result;
       } catch (e) {
         return false;

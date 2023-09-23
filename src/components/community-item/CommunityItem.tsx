@@ -44,7 +44,7 @@ export default function CommunityItem({ data }: any) {
                     <Progress.Root className="ProgressRoot" value={progress}>
                         <Progress.Indicator
                             className="ProgressIndicator"
-                            style={{ transform: `translateX(-${Number(data.target) - progress}%)` }}
+                            style={{ transform: `translateX(${(progress * 100) / Number(data.target) - 100 }%)` }}
                         />
                     </Progress.Root>
                 </div>

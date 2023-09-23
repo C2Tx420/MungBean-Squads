@@ -47,6 +47,10 @@ export default function PocketItem({ data }: Props) {
       setVaultAddress(_vaultAddress);
     }
   }
+
+  const handleSendPrize = () => {
+    
+  }
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -86,6 +90,7 @@ export default function PocketItem({ data }: Props) {
               </>
             }
           </Flex>
+          <Button size={"3"} color='pink' onClick={handleSendPrize}>Send Prize</Button>
           <Button size={"3"} onClick={handleUpdate}>Update</Button>
         </Flex>
       </Dialog.Content>

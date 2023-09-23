@@ -13,11 +13,11 @@ export default function Community() {
         fetchData();
     }, [])
     const fetchData = async () => {
-        const vaultsData = await get('vaults');
+        const vaultsData: any = await get('vaults');
         if(vaultsData) {
             const vaultList: any = [];
-            await Object.keys(JSON.parse(vaultsData)).map((key,value) => {
-                vaultList.push(JSON.parse(vaultsData)[key])
+            await JSON.parse(vaultsData).map((vault: any) => {
+                vaultList.push(vault)
             });
             setVaultList(vaultList);
         }
