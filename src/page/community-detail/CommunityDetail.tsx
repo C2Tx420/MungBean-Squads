@@ -10,6 +10,7 @@ import { useShyft } from "../../hook/useShyft";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import * as Progress from '@radix-ui/react-progress';
+import QrTransfer from "../../components/qr-transfer";
 
 
 
@@ -34,7 +35,13 @@ export default function CommunityDetail() {
     }
 
     useEffect(() => {
-        fetchData();
+        const interval = setInterval(() => {
+            fetchData();
+        }, 60000);
+
+        return () => {
+            clearInterval(interval)
+        }
     }, [])
     const desc = { __html: data.desc };
     return (
@@ -58,6 +65,7 @@ export default function CommunityDetail() {
                                 {wallet.publicKey &&
                                     <TransferTools fetchData={fetchData} type="deposit" vaultAddress={vaultAddress} walletAddress={wallet.publicKey.toString()} />
                                 }
+                                <QrTransfer />
                             </div>
                             <div className="detail__content">
                                 <h2 className="detail__content-title">
