@@ -304,9 +304,9 @@ export const useSquads = () => {
     return vaultPda.toString();
   }
 
-  const getTransactionInfo = async (createKey: PublicKey, indexTransaction: number) => {
+  const getTransactionInfo = async (createKey: PublicKey, indexTransaction: bigint) => {
     const {
-      Transaction,
+      VaultTransaction,
     } = multisig.accounts;
     const [multisigPda] = multisig.getMultisigPda({
       createKey,
@@ -317,7 +317,7 @@ export const useSquads = () => {
       index: indexTransaction,
     });
 
-    let transactionAccount = await Transaction.fromAccountAddress(
+    let transactionAccount = await VaultTransaction.fromAccountAddress(
       connection,
       transactionPda
     );
