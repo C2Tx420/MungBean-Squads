@@ -122,6 +122,6 @@ export const scroolUp = () => {
   });
 };
 
-export const genVaultIndex = (obj: any) => {
-  return obj[Object.keys(obj)[Object.keys(obj).length - 1]].vaultIndex + 1;
+export const genVaultIndex = (arr: any) => {
+  return arr[arr.length - 1].vaultIndex + 1;
 }

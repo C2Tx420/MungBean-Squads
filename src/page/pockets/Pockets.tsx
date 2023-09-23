@@ -5,6 +5,8 @@ import PocketItem from "../../components/pocket-item";
 import './styles.scss';
 import { useSquads } from "../../hook/useSquads";
 import { useLocalStorage } from "../../hook/useLocalStorage";
+import walletAdapter from "../../components/wallet-adapter";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 
 export default function Pockets() {
@@ -12,6 +14,7 @@ export default function Pockets() {
   const [vaultList, setVaultList] = useState<any>([]);
   const [multisigData, setMultisigData] = useState<any>();
   const { get } = useLocalStorage();
+  const { publicKey } = useWallet();
   useEffect(() => {
     (async () => {
       await fetchData();
@@ -19,12 +22,11 @@ export default function Pockets() {
 
   }, [])
 
-  const filterData = async (multisigData: any, vaultStorage: any) => {
+  const filterData = async (vaultStorage: any) => {
     const vaults: any = [];
-    const memberList = multisigData.members
-    await memberList.map((member: any) => {
-      if (vaultStorage[member.key.toString()]) {
-        vaults.push(vaultStorage[member.key.toString()]);
+    await vaultStorage.map((vault: any) => {
+      if (vault.createKey === publicKey?.toString()) {
+        vaults.push(vault)
       }
     })
     setVaultList(vaults);
@@ -34,7 +36,7 @@ export default function Pockets() {
     const multisig: any = await getMultisig()
     const vaultListStorage: any = get('vaults');
     setMultisigData(multisig)
-    filterData(multisig,JSON.parse(vaultListStorage));
+    filterData(JSON.parse(vaultListStorage));
   }
   return (
     <div className="pockets">

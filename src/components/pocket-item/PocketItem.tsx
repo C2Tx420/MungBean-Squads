@@ -23,17 +23,24 @@ export default function PocketItem({ data }: Props) {
   const [vaultAddress, setVaultAddress] = useState<any>('')
   const handleUpdate = () => {
     const vaultListStorage: any = get('vaults');
-    set('vaults', JSON.stringify({ ...JSON.parse(vaultListStorage), [data.address]: { ...data, public: publicStatus } }));
+    const updatedVaultList = JSON.parse(vaultListStorage).map((vault: any) => {
+      if (vault.address === data.address) {
+        return { ...vault, public: publicStatus }
+      }
+    })
+    set('vaults', JSON.stringify(updatedVaultList));
   }
 
   const [balance, setBalance] = useState(0);
+
+  const desc = { __html: data.desc };
 
   useEffect(() => {
     fetchData();
   }, [])
 
   const fetchData = async () => {
-    if(wallet.publicKey) {
+    if (wallet.publicKey) {
       const _vaultAddress = await getVaultAddress(wallet.publicKey, data.vaultIndex);
       const balance = await getBalance(_vaultAddress)
       setBalance(balance);
@@ -62,9 +69,8 @@ export default function PocketItem({ data }: Props) {
             <Text as="div" size="2" mb="1" weight="bold">
               Description:
             </Text>
-            <p className="pocket-item__detail-desc">
-              {data.desc}
-            </p>
+            <div className="pocket-item__detail-desc" dangerouslySetInnerHTML={desc}>
+            </div>
           </label>
           <label>
             <Text as="div" size="2" mb="1" weight="bold">
@@ -80,7 +86,7 @@ export default function PocketItem({ data }: Props) {
               </>
             }
           </Flex>
-          <Button size={"2"} onClick={handleUpdate}>Update</Button>
+          <Button size={"3"} onClick={handleUpdate}>Update</Button>
         </Flex>
       </Dialog.Content>
     </Dialog.Root>

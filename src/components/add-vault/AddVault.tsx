@@ -7,17 +7,18 @@ import { useLocalStorage } from '../../hook/useLocalStorage';
 import { genVaultIndex } from '../../lib/utils';
 
 export default function AddVault() {
-    const { addMember, excute } = useSquads();
+    const { addMember, getVaultAddress } = useSquads();
     const { get, set } = useLocalStorage();
     const wallet = useWallet();
     const { sign } = useShyft();
     const [form, setForm] = useState({ name: '', desc: '', img: '', target: '', public: false });
     const handleAddVault = async () => {
         if (wallet.publicKey) {
-            const address = await addMember(wallet.publicKey);
+            // const address = await addMember(wallet.publicKey);
             const vaultListStorage: any = get('vaults');
             const vaultIndex = genVaultIndex(JSON.parse(vaultListStorage));
-            set('vaults', JSON.stringify({ ...vaultListStorage, [address]: {...form, vaultIndex, createKey: wallet.publicKey} }))
+            const address = await getVaultAddress(wallet.publicKey,vaultIndex)
+            set('vaults', JSON.stringify([...vaultListStorage, { ...form, vaultIndex, createKey: wallet.publicKey, address}]))
         }
     }
     return (
