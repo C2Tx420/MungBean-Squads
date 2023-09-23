@@ -29,7 +29,7 @@ export default function QRTransfer() {
     return (
         <Dialog.Root>
             <Dialog.Trigger>
-                <Button onClick={createQr}>Deposit with QR</Button>
+                <Button size={"3"} onClick={createQr}>Deposit with QR</Button>
             </Dialog.Trigger>
 
             <Dialog.Content style={{ maxWidth: 450, overflow: "hidden" }}>

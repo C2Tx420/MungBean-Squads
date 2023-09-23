@@ -63,9 +63,15 @@ export default function CommunityDetail() {
                                     />
                                 </Progress.Root>
                                 {wallet.publicKey &&
-                                    <TransferTools fetchData={fetchData} type="deposit" vaultAddress={vaultAddress} walletAddress={wallet.publicKey.toString()} />
+                                    <div className="detail__left-transfer">
+                                        <div className="detail__left-transfer-btn">
+                                            <TransferTools fetchData={fetchData} type="deposit" vaultAddress={vaultAddress} walletAddress={wallet.publicKey.toString()} />
+                                        </div>
+                                        <div className="detail__left-transfer-btn">
+                                            <QrTransfer />
+                                        </div>
+                                    </div>
                                 }
-                                <QrTransfer />
                             </div>
                             <div className="detail__content">
                                 <h2 className="detail__content-title">
