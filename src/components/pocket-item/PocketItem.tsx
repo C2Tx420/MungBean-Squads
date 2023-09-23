@@ -49,7 +49,7 @@ export default function PocketItem({ data }: Props) {
   }
 
   const handleSendPrize = () => {
-    
+
   }
   return (
     <Dialog.Root>
@@ -90,8 +90,10 @@ export default function PocketItem({ data }: Props) {
               </>
             }
           </Flex>
-          <Button size={"3"} color='pink' onClick={handleSendPrize}>Send Prize</Button>
-          <Button size={"3"} onClick={handleUpdate}>Update</Button>
+          {/* <Button size={"3"} color='pink' onClick={handleSendPrize}>Send Prize</Button> */}
+          <Dialog.Close>
+            <Button size={"3"} onClick={handleUpdate}>Update</Button>
+          </Dialog.Close>
         </Flex>
       </Dialog.Content>
     </Dialog.Root>

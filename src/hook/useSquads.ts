@@ -155,10 +155,10 @@ export const useSquads = () => {
   };
 
   const approveProposal = async (
+    createKey: PublicKey,
     pubKey: PublicKey,
     transactionIndex: bigint
   ) => {
-    const createKey = pubKey;
     const member = pubKey;
 
     const [multisigPda] = multisig.getMultisigPda({
@@ -230,7 +230,7 @@ export const useSquads = () => {
     });
 
     const createProposalSig = await createProposal(pubKey, transactionIndex);
-    const approveProposalSig = await approveProposal(pubKey, transactionIndex);
+    const approveProposalSig = await approveProposal(pubKey, pubKey, transactionIndex);
 
     const excuteSig = await multisig.instructions.configTransactionExecute({
       multisigPda,
@@ -272,6 +272,7 @@ export const useSquads = () => {
       const createPrososalSig = await createProposal(pubKey, transactionIndex);
       const approveProposalSig = await approveProposal(
         pubKey,
+        pubKey,
         transactionIndex
       );
 
@@ -303,6 +304,27 @@ export const useSquads = () => {
     return vaultPda.toString();
   }
 
+  const getTransactionInfo = async (createKey: PublicKey, indexTransaction: number) => {
+    const {
+      Transaction,
+    } = multisig.accounts;
+    const [multisigPda] = multisig.getMultisigPda({
+      createKey,
+    });
+
+    const [transactionPda] = multisig.getTransactionPda({
+      multisigPda,
+      index: indexTransaction,
+    });
+
+    let transactionAccount = await Transaction.fromAccountAddress(
+      connection,
+      transactionPda
+    );
+
+    return transactionAccount;
+  }
+
   return {
     createMultisig,
     getMultisig,
@@ -313,6 +335,7 @@ export const useSquads = () => {
     createProposal,
     addMember,
     withdraw,
-    getVaultAddress
+    getVaultAddress,
+    getTransactionInfo
   };
 };

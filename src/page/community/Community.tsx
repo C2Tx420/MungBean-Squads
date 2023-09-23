@@ -8,15 +8,16 @@ import CommunityItem from '../../components/community-item'
 
 export default function Community() {
     const { get } = useLocalStorage();
-    const [vaultList,setVaultList] = useState([]);
+    const [vaultList, setVaultList] = useState([]);
     useEffect(() => {
         fetchData();
     }, [])
     const fetchData = async () => {
         const vaultsData: any = await get('vaults');
-        if(vaultsData) {
+        if (vaultsData) {
             const vaultList: any = [];
             await JSON.parse(vaultsData).map((vault: any) => {
+                console.log(vault)
                 vaultList.push(vault)
             });
             setVaultList(vaultList);
@@ -30,8 +31,12 @@ export default function Community() {
                 <Container>
                     <h2>Community</h2>
                     <ContentBox>
-                        {vaultList.map((vault: any,idx: number)=>(
-                            <CommunityItem key={idx} data={vault}/>
+                        {vaultList.map((vault: any, idx: number) => (
+                            <>
+                                {vault &&
+                                    <CommunityItem key={idx} data={vault} />
+                                }
+                            </>
                         ))}
                     </ContentBox>
                 </Container>

@@ -33,6 +33,10 @@ function TransferTools({ type, vaultAddress, walletAddress, fetchData, vaultInde
         if (value && wallet.publicKey) {
             try {
                 if (type === 'deposit') {
+                    console.log(fromAddress);
+                    console.log(toAddress);
+                    console.log(Number(value));
+
                     const tx = await sendSol(fromAddress, toAddress, Number(value));
                     await sign(wallet, tx)
                 } else {

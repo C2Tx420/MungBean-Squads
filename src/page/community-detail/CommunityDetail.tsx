@@ -35,13 +35,13 @@ export default function CommunityDetail() {
     }
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            fetchData();
-        }, 60000);
+        fetchData();
+        // const interval = setInterval(() => {
+        // }, 60000);
 
-        return () => {
-            clearInterval(interval)
-        }
+        // return () => {
+        //     clearInterval(interval)
+        // }
     }, [])
     const desc = { __html: data.desc };
     return (

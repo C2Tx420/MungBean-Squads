@@ -29,25 +29,23 @@ export default function CommunityItem({ data }: any) {
     }, [])
 
     const handleChangeRoute = () => {
-        navigate(`/community/${data.address}`,{state: data})
+        navigate(`/community/${data.address}`, { state: data })
     }
     return (
         <div className="community-item" onClick={handleChangeRoute}>
-            <div className="pocket-item">
-                <div className="pocket-item__img">
-                    <img src={data.img} alt="" />
-                </div>
-                <div className="pocket-item__content">
-                    <p className='pocket-item__content-name'>{data.name}</p>
-                    <p className='pocket-item__content-addr'>{truncateWallet(vaultAddress)}</p>
-                    <p className='pocket-item__content-balance'>{balance}/{data.target} <span>SOL</span></p>
-                    <Progress.Root className="ProgressRoot" value={progress}>
-                        <Progress.Indicator
-                            className="ProgressIndicator"
-                            style={{ transform: `translateX(${(progress * 100) / Number(data.target) - 100 }%)` }}
-                        />
-                    </Progress.Root>
-                </div>
+            <div className="pocket-item__img">
+                <img src={data.img} alt="" />
+            </div>
+            <div className="pocket-item__content">
+                <p className='pocket-item__content-name'>{data.name}</p>
+                <p className='pocket-item__content-addr'>{truncateWallet(vaultAddress)}</p>
+                <p className='pocket-item__content-balance'>{balance}/{data.target} <span>SOL</span></p>
+                <Progress.Root className="ProgressRoot" value={progress}>
+                    <Progress.Indicator
+                        className="ProgressIndicator"
+                        style={{ transform: `translateX(${(progress * 100) / Number(data.target) - 100}%)` }}
+                    />
+                </Progress.Root>
             </div>
         </div>
     )
