@@ -5,10 +5,10 @@ import { useSquads } from "../../hook/useSquads";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { historyTransactionConvert, timeout, truncateWallet } from "../../lib/utils";
 import { CopyIcon } from "@radix-ui/react-icons";
-import { Area, AreaChart, ResponsiveContainer, Tooltip, YAxis } from "recharts";
 import HistoryTransaction from "../../components/history-transaction";
 import TransferTools from "../../components/transfer-tools";
 import { useShyft } from "../../hook/useShyft";
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
   const { getMainVault } = useSquads();
@@ -24,43 +24,25 @@ export default function Dashboard() {
     })()
   }, [publicKey, vaultAddress])
   const fetchData = async () => {
-    if(publicKey) {
+    if (publicKey) {
       const address = await getMainVault(publicKey);
       setVaultAddress(address);
 
-      if(vaultAddress) {
+      if (vaultAddress) {
         const balance = await getBalance(vaultAddress);
         setVaultValue(balance);
-    
+
         await timeout(1000);
-    
+
         const history = await getHistoryTransaction(vaultAddress);
-    
+
         historyTransactionConvert(history, vaultAddress);
-    
+
         setHistoryData(await historyTransactionConvert(history, vaultAddress));
       }
-  
+
     }
   }
-
-  const data = [
-    {
-      uv: 0,
-    },
-    {
-      uv: 1,
-    },
-    {
-      uv: 0.4,
-    },
-    {
-      uv: 0.5,
-    },
-    {
-      uv: 1.2,
-    }
-  ];
 
   return (
     <div className="dashboard">
@@ -92,53 +74,16 @@ export default function Dashboard() {
           </div>
 
         </div>
-        <div className="dashboard__content">
-          <div className="dashboard__content-left">
-            <div className="dashboard__content-left-recent">
-              <h4>Recent transactions</h4>
-              {historyData && historyData.map((data: any, idx: any) => (
-                <HistoryTransaction key={idx} data={data} />
-              ))}
-            </div>
+      </ContentBox>
+      <ContentBox className={'dashboard__recent-wrapper'}>
+        <div className="dashboard__recent">
+          <div className="dashboard__recent-heading">
+            <h4>Recent transactions</h4>
+            <Link to="/history-transaction">View all</Link>
           </div>
-          <div className="dashboard__content-right">
-            <ResponsiveContainer width='100%' height='40%'>
-              <AreaChart
-                data={data}
-                margin={{ top: 20 }}
-              >
-                <defs>
-                  <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#00a3ff" stopOpacity={0.8} />
-                    <stop offset="95%" stopColor="#00a3ff" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <YAxis domain={["auto", "auto"]} orientation="left" />
-                <Tooltip
-                  content={({ active, payload }) => {
-                    if (active && payload && payload.length) {
-                      return (
-                        <div className="dashboard__chart-tooltip">
-                          <span>{payload[0].value} SOL</span>
-                        </div>
-                      )
-                    }
-
-                    return null
-                  }}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="uv"
-                  stroke="#00a3ff"
-                  fillOpacity={1}
-                  strokeWidth={3}
-                  fill="url(#colorUv)"
-                  animateNewValues
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
+          {historyData && historyData.map((data: any, idx: any) => (
+            <HistoryTransaction key={idx} data={data} />
+          ))}
         </div>
       </ContentBox>
     </div>

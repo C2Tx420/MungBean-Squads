@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom'
 import './style.scss'
-import { CubeIcon, GearIcon, HomeIcon, RocketIcon } from '@radix-ui/react-icons'
+import { GearIcon, HomeIcon, RocketIcon } from '@radix-ui/react-icons'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
 

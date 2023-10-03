@@ -1,9 +1,10 @@
 :root {
-  --active-cl: #00a3ff;
+  --active-cl: #0175FE;
   --theme-text-cl: var(--theme-panel--focus-ring-color);
   --dark-hover: rgba(224, 224, 255, 0.0588235294);
   --light-hover: #ccc;
   --bg2-cl: #1E1E23;
+  --bg-img: url('/bg.webp')
 }
 .theme-wrapper {
   background-color: var(--color-page-background);

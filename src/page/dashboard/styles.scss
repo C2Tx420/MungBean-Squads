@@ -4,7 +4,7 @@
     flex-direction: column;
 
     .content-box {
-        flex: 1;
+        // flex: 1;
     }
 
     &__heading{
@@ -73,28 +73,18 @@
         }
     }
 
+    &__recent-wrapper {
+        margin: 10px 0;
+    }
+    &__recent {
+        height: 25vh;
+        padding: 10px;
+        overflow: hidden;
 
-    &__content {
-        display: flex;
-        gap: 10px;
-        height: 100%;
-        border-top: 3px solid var(--gray-a4);
-        padding-top: 20px;
-
-        &-left,
-        &-right {
-            width: 50%;
-        }
-
-        &-left {
-            &-chart{
-                width: 110%;
-                height: 40%;
-                margin-left: -10%;
-            }
-            &-recent{
-                // padding: 20px 0;
-            }
+        &-heading{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     }
 

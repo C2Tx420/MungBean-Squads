@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom'
 export default function ConnectWallet() {
     const location = useLocation();
     return (
+        <div className="connect-wallet">
         <div className="connect-wallet-modal">
             <h1 className='connect-wallet-modal__header'>
                 Gm
@@ -20,8 +21,9 @@ export default function ConnectWallet() {
                 }
             </div>
             <div className="connect-wallet-modal__btn">
-                <WalletMultiButton />
+                <WalletMultiButton/>
             </div>
+        </div>
         </div>
     )
 }

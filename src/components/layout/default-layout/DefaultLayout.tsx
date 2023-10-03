@@ -38,18 +38,20 @@ export default function DefaultLayout() {
   return (
     <>
       <Header />
-      <Container>
-        {hasMultisig ?
-          <div className="main">
-            <SideNav />
-            <div className="main__content">
-              <Outlet />
+      <div className="main">
+        <Container>
+          {hasMultisig ?
+            <div className="main__content-wrapper">
+              <SideNav />
+              <div className="main__content">
+                <Outlet />
+              </div>
             </div>
-          </div>
-          :
-          <Loading />
-        }
-      </Container>
+            :
+            <Loading />
+          }
+        </Container>
+      </div>
     </>
   )
 }

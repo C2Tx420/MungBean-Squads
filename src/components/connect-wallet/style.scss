@@ -1,27 +1,35 @@
-.connect-wallet-modal{
-    background-color: #1D222B;
-    max-width: 450px;
-    width: 450px;
-    padding: 40px;
-    border-radius: 12px;
-
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    &__header{
-        display: flex;
-        align-items: center;
-        font-size: 2.4rem;
-    }
-    &__desc{
-        margin: 20px 0;
-        font-weight: 500;
-        color: #ffffff99;
-    }
-    &__btn{
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
+.connect-wallet{
+    background: var(--bg-img);
+    width: 100vw;
+    height: 100vh;
+    &-modal{
+        background-color: #1D222B;
+        max-width: 450px;
+        width: 450px;
+        padding: 40px;
+        border-radius: 12px;
+    
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        &__header{
+            display: flex;
+            align-items: center;
+            font-size: 2.4rem;
+        }
+        &__desc{
+            margin: 20px 0;
+            font-weight: 500;
+            color: #ffffff99;
+        }
+        &__btn{
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            .wallet-adapter-button.wallet-adapter-button-trigger {
+                background-color: var(--active-cl);
+            }
+        }
     }
 }

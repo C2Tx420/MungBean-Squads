@@ -49,7 +49,15 @@ pre {
 }
 
 a {
-  background-color: transparent
+  background-color: transparent;
+  text-decoration: none;
+  color: unset;
+  transition: .2s;
+
+  &:hover {
+    opacity: .8;
+    transition: .2s;
+  }
 }
 
 abbr[title] {
