@@ -39,7 +39,7 @@ export default function DefaultLayout() {
     <>
       <Header />
       <div className="main">
-        <Container>
+        <Container >
           {hasMultisig ?
             <div className="main__content-wrapper">
               <SideNav />

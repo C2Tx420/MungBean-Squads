@@ -76,7 +76,7 @@
     &__recent-wrapper {
         margin: 10px 0;
     }
-    &__recent {
+    &__recent,&__trans {
         height: 25vh;
         padding: 10px;
         overflow: hidden;
@@ -86,6 +86,10 @@
             justify-content: space-between;
             align-items: center;
         }
+    }
+
+    &__trans {
+        height: 28vh;
     }
 
     &__chart-tooltip {

@@ -9,6 +9,7 @@ import HistoryTransaction from "../../components/history-transaction";
 import TransferTools from "../../components/transfer-tools";
 import { useShyft } from "../../hook/useShyft";
 import { Link } from "react-router-dom";
+import TransactionItem from "../../components/transaction-item/TransactionItem";
 
 export default function Dashboard() {
   const { getMainVault } = useSquads();
@@ -36,13 +37,34 @@ export default function Dashboard() {
 
         const history = await getHistoryTransaction(vaultAddress);
 
-        historyTransactionConvert(history, vaultAddress);
-
         setHistoryData(await historyTransactionConvert(history, vaultAddress));
       }
 
     }
   }
+
+  const mockTransactions = [
+    {
+      "date": "2023-10-04",
+      "transactionList": [
+        {
+          "time": "00:20 PM",
+          "type": "Pending",
+          "value": 0.2
+        }
+      ]
+    },
+    {
+      "date": "2023-09-22",
+      "transactionList": [
+        {
+          "time": "01:40 PM",
+          "type": "Pending",
+          "value": 0.1
+        },
+      ]
+    }
+  ];
 
   return (
     <div className="dashboard">
@@ -78,11 +100,23 @@ export default function Dashboard() {
       <ContentBox className={'dashboard__recent-wrapper'}>
         <div className="dashboard__recent">
           <div className="dashboard__recent-heading">
-            <h4>Recent transactions</h4>
+            <h4>History transaction</h4>
             <Link to="/history-transaction">View all</Link>
           </div>
           {historyData && historyData.map((data: any, idx: any) => (
             <HistoryTransaction key={idx} data={data} />
+          ))}
+        </div>
+      </ContentBox>
+
+      <ContentBox className={'dashboard__trans-wrapper'}>
+        <div className="dashboard__trans">
+          <div className="dashboard__trans-heading">
+            <h4>Transactions</h4>
+            <Link to="/transaction">View all</Link>
+          </div>
+          {mockTransactions && mockTransactions.map((data: any, idx: any) => (
+            <TransactionItem key={idx} data={data} />
           ))}
         </div>
       </ContentBox>
