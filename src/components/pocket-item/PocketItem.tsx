@@ -61,7 +61,6 @@ export default function PocketItem({ data }: Props) {
           <div className="pocket-item__content">
             <p className='pocket-item__content-name'>{data.name}</p>
             <p className='pocket-item__content-addr'>{truncateWallet(vaultAddress)}</p>
-            <p className='pocket-item__content-balance'>{balance}/{data.target} <span>SOL</span></p>
           </div>
         </div>
       </Dialog.Trigger>

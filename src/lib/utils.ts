@@ -81,6 +81,7 @@ export async function historyTransactionConvert(data: any, pubKey: string) {
 
   await Object.entries(groupedTransaction).map((item: any) => {
     const transactionList = item[1]?.transaction;
+    transactionList.length = 4;
     result.push({
       date: item[0],
       transactionList,

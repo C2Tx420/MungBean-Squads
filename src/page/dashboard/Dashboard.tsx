@@ -49,8 +49,10 @@ export default function Dashboard() {
       "transactionList": [
         {
           "time": "00:20 PM",
-          "type": "Pending",
-          "value": 0.2
+          "status": "Pending",
+          "from": 'Salary',
+          "value": 0.2,
+          "to": 'FMGXLmBHASXJYw4DB1Ds2CqKtUH39F8hgMxK8Jrayvun'
         }
       ]
     },
@@ -59,8 +61,10 @@ export default function Dashboard() {
       "transactionList": [
         {
           "time": "01:40 PM",
-          "type": "Pending",
-          "value": 0.1
+          "status": "Pending",
+          "from": 'Marketing',
+          "value": 0.1,
+          "to": 'DNFDSXCZASXJYw4DB1Ds2CqKtUH39F8hgMxK8Jrbdxcz'
         },
       ]
     }

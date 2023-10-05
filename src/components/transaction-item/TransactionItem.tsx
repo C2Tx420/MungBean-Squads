@@ -10,10 +10,11 @@ export default function TransactionItem({data}: any) {
             {data.transactionList.map(((item:any, idx: number)=>(
                 <div className="transaction__item" key={idx}>
                     <p className="transaction__item-time">{item.time}</p>
+                    <p className="transaction__item-from">{item.from}</p>
                     <p className="transaction__item-value">{item.value} SOL</p>
                     <p className="transaction__item-sign">1/2</p>
-                    <p className="transaction__item-address">{truncateWallet('1asdjasdksakdjlsajdlas123123')}</p>
-                    <p className="transaction__item-type">{item.type}</p>
+                    <p className="transaction__item-address">{truncateWallet(item.to)}</p>
+                    <p className="transaction__item-status">{item.status}</p>
                     <DotsHorizontalIcon className="transaction__item-view"/>
                 </div>
             )))}
