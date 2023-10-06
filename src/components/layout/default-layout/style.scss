@@ -2,6 +2,7 @@
     background-image: var(--bg-img);
     min-height: 100vh;
     padding-top: 60px;
+    padding-bottom: 20px;      
     &__content-wrapper {
         display: flex;
         gap: 20px;
@@ -10,6 +11,6 @@
     }
     &__content {
         flex: 1;
-        height: 85vh;        
+        // height: 85vh;  
     }
 }

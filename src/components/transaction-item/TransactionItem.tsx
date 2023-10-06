@@ -3,7 +3,6 @@ import { truncateWallet } from '../../lib/utils'
 import './style.scss'
 
 export default function TransactionItem({data}: any) {
-  console.log(data)
   return (
     <div className="transaction">
         <p className='transaction__date'>{data.date}</p>

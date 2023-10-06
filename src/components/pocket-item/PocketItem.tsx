@@ -89,7 +89,6 @@ export default function PocketItem({ data }: Props) {
               </>
             }
           </Flex>
-          {/* <Button size={"3"} color='pink' onClick={handleSendPrize}>Send Prize</Button> */}
           <Dialog.Close>
             <Button size={"3"} onClick={handleUpdate}>Update</Button>
           </Dialog.Close>

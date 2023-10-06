@@ -171,7 +171,17 @@ export const useSquads = () => {
       member,
     });
 
-    return sig;
+    const tx = new Transaction();
+    tx.add(sig);
+    tx.feePayer = pubKey;
+    tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+    const serializedTransaction = tx.serialize({
+      requireAllSignatures: false,
+      verifySignatures: true,
+    });
+    const transactionBase64 = serializedTransaction.toString("base64");
+
+    await sign(wallet, transactionBase64);
   };
 
   const excute = async (pubKey: PublicKey, transactionIndex: bigint) => {
@@ -279,7 +289,6 @@ export const useSquads = () => {
       const tx = new Transaction();
       tx.add(createVaultSig);
       tx.add(createPrososalSig);
-      tx.add(approveProposalSig);
       tx.feePayer = pubKey;
       tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
       const serializedTransaction = tx.serialize({
@@ -300,7 +309,6 @@ export const useSquads = () => {
       multisigPda,
       index,
     });
-    // console.log(vaultPda.toString());
     return vaultPda.toString();
   }
 

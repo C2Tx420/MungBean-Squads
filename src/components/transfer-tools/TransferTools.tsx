@@ -42,8 +42,6 @@ function TransferTools({ type, vaultAddress, walletAddress, fetchData, vaultInde
                 } else {
                     const withdrawData = await withdraw(new PublicKey(vaultAddress), value, vaultIndex);
                     await sign(wallet, withdrawData?.transactionBase64);
-                    await timeout(1000);
-                    await excute(wallet.publicKey, withdrawData?.transactionIndex);
                 }
             } catch (e) {
                 dispatch(createToast({
