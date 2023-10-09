@@ -252,7 +252,6 @@ export const useSquads = () => {
     const tx = new Transaction();
     tx.add(sig);
     tx.add(createProposalSig);
-    tx.add(approveProposalSig);
     tx.add(excuteSig);
     tx.feePayer = pubKey;
     tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
@@ -312,7 +311,7 @@ export const useSquads = () => {
     return vaultPda.toString();
   }
 
-  const getTransactionInfo = async (createKey: PublicKey, indexTransaction: bigint) => {
+  const getTransactionInfo = async (createKey: PublicKey, indexTransaction: number) => {
     const {
       VaultTransaction,
     } = multisig.accounts;
@@ -320,9 +319,11 @@ export const useSquads = () => {
       createKey,
     });
 
+    const index = 35n;
+
     const [transactionPda] = multisig.getTransactionPda({
       multisigPda,
-      index: indexTransaction,
+      index,
     });
 
     let transactionAccount = await VaultTransaction.fromAccountAddress(
@@ -331,6 +332,37 @@ export const useSquads = () => {
     );
 
     return transactionAccount;
+  }
+
+  const getProposalInfo = async (createKey: PublicKey, indexTransaction: any) => {
+    const {
+      Proposal
+  } = multisig.accounts;
+    const [multisigPda] = multisig.getMultisigPda({
+      createKey,
+    });
+
+    // const [transactionPda] = multisig.getTransactionPda({
+    //   multisigPda,
+    //   index: BigInt(indexTransaction),
+    // });
+
+    const multisigData: any = await getMultisig();
+
+    const transactionIndex = BigInt(indexTransaction) + 0n;
+
+    const [proposalPda, proposalBump] = multisig.getProposalPda({
+      multisigPda,
+      transactionIndex,
+  });
+
+  const proposalAccount = await Proposal.fromAccountAddress(
+    connection,
+    proposalPda
+  );
+
+    // return transactionAccount;
+    return proposalAccount;
   }
 
   return {
@@ -344,6 +376,7 @@ export const useSquads = () => {
     addMember,
     withdraw,
     getVaultAddress,
-    getTransactionInfo
+    getTransactionInfo,
+    getProposalInfo
   };
 };

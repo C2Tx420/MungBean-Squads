@@ -10,6 +10,7 @@ import TransferTools from "../../components/transfer-tools";
 import { useShyft } from "../../hook/useShyft";
 import { Link } from "react-router-dom";
 import TransactionItem from "../../components/transaction-item/TransactionItem";
+import Chart from "../../components/chart/Chart";
 
 export default function Dashboard() {
   const { getMainVault } = useSquads();
@@ -116,12 +117,9 @@ export default function Dashboard() {
       <ContentBox className={'dashboard__trans-wrapper'}>
         <div className="dashboard__trans">
           <div className="dashboard__trans-heading">
-            <h4>Transactions</h4>
-            <Link to="/transaction">View all</Link>
+            <h4>Overview</h4>
           </div>
-          {mockTransactions && mockTransactions.map((data: any, idx: any) => (
-            <TransactionItem key={idx} data={data} />
-          ))}
+          <Chart />
         </div>
       </ContentBox>
     </div>

@@ -26,7 +26,7 @@ export default function SideNav() {
                 </span>
                 Members
             </NavLink>
-            <NavLink to='/members' className="sidenav__item">
+            <NavLink to='/transactions' className="sidenav__item">
                 <span>
                     <Pencil2Icon height={14} width={14} />
                 </span>

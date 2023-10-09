@@ -6,6 +6,7 @@ import Dashboard from "../page/dashboard/Dashboard";
 import Pockets from "../page/pockets";
 import Home from "../page/home/Home";
 import Config from "../page/config";
+import Transaction from "../page/transactions";
 
 export const routeList: Array<routeModel> = [
   {
@@ -25,6 +26,10 @@ export const routeList: Array<routeModel> = [
           {
             element: Pockets,
             path: "/pockets",
+          },
+          {
+            element: Transaction,
+            path: "/transactions",
           },
           {
             element: Config,
