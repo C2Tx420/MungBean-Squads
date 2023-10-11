@@ -1,6 +1,7 @@
 import { DotsHorizontalIcon, DotsVerticalIcon, MagnifyingGlassIcon, PlusIcon } from '@radix-ui/react-icons'
 import { truncateWallet } from '../../lib/utils'
 import './style.scss'
+import { Button } from '@radix-ui/themes'
 
 export default function TransactionItem({data}: any) {
   return (
@@ -14,7 +15,10 @@ export default function TransactionItem({data}: any) {
                     <p className="transaction__item-sign">1/2</p>
                     <p className="transaction__item-address">{truncateWallet(item.to)}</p>
                     <p className="transaction__item-status">{item.status}</p>
-                    <DotsHorizontalIcon className="transaction__item-view"/>
+                    <div className="transaction__item-action">
+                      <Button>Approve</Button>
+                      <Button color='gray'>Reject</Button>
+                    </div>
                 </div>
             )))}
     </div>

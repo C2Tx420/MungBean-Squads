@@ -4,6 +4,7 @@ import { useSquads } from "../../hook/useSquads";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import TransactionItem from "../../components/transaction-item";
+import './style.scss';
 
 export default function Transaction() {
   const { getProposalInfo, getTransactionInfo, getMainVault } = useSquads();
