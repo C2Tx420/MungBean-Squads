@@ -19,20 +19,19 @@ const data = [
       uv: 1.2,
     }
   ];
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
 export default function Chart() {
     return (
-        <Tabs.Root defaultValue="account">
+        <Tabs.Root defaultValue="main">
             <Tabs.List>
-                <Tabs.Trigger value="account">Account</Tabs.Trigger>
-                <Tabs.Trigger value="documents">Documents</Tabs.Trigger>
-                <Tabs.Trigger value="settings">Settings</Tabs.Trigger>
+                <Tabs.Trigger value="main">Main Vault</Tabs.Trigger>
+                <Tabs.Trigger value="marketing">Marketing</Tabs.Trigger>
+                {/* <Tabs.Trigger value="settings">Settings</Tabs.Trigger> */}
             </Tabs.List>
 
-            <Box px="4" pt="3" pb="2">
-                <Tabs.Content value="account">
-                <ResponsiveContainer width='100%' height='40%'>
+            <Box px="4" pt="3" pb="2" height={"100%"}>
+              <Tabs.Content value="main">
+              <ResponsiveContainer width='100%' height={200}>
               <AreaChart
                 data={data}
                 margin={{ top: 20 }}
